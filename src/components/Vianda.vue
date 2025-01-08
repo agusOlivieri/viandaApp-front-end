@@ -1,4 +1,27 @@
 <script setup>
+import { ref } from 'vue';
+import ConfirmacionModal from '@/components/ConfirmacionModal.vue';
+
+const mostrarConfirmacion = ref(false);
+const mensajeConfirmacion = ref('');
+const viandaSeleccionada = ref(null);
+
+const seleccionarVianda = (vianda) => {
+    viandaSeleccionada.value = vianda;
+    mensajeConfirmacion.value = `¿Desea seleccionar la vianda "${vianda.title}"?`
+    mostrarConfirmacion.value = true;
+};
+
+const confirmarSeleccion = () => {
+    alert(`Ha seleccionado: ${viandaSeleccionada.value.title}`)
+    mostrarConfirmacion.value = false
+    viandaSeleccionada.value = null
+};
+
+const cancelarSeleccion = () => {
+    viandaSeleccionada.value = null
+    mostrarConfirmacion.value = false
+};
 
 const viandas = [
                 {
@@ -18,6 +41,7 @@ const viandas = [
                     title: 'vianda4'
                 }
             ]
+
 </script>
 
 <template>
@@ -28,10 +52,13 @@ const viandas = [
             <p class="text-sm text-gray-600 mt-2">Aquí va una descripción de la comida</p>
             <div class="mt-4 flex justify-between items-center">
                 <span class="text-xl font-semibold text-blue-700">$800</span>
-                <button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-700">
+                <button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-700" @click="seleccionarVianda(vianda)">
                     Seleccionar
                 </button>
             </div>
         </div>
     </div>
+            
+    <!-- Ventana de confirmación -->
+    <ConfirmacionModal :mostrar="mostrarConfirmacion" :mensaje="mensajeConfirmacion" @confirmar="confirmarSeleccion" @cancelar="cancelarSeleccion"/> 
 </template>

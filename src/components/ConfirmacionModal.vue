@@ -1,6 +1,4 @@
 <script setup>
-import { defineEmits } from 'vue';
-
 defineProps({
     mensaje: {
         type: String,
@@ -11,13 +9,13 @@ defineProps({
     }
 });
 
-const emit = defineEmits(['confirmar', 'cancelar']);
+defineEmits(['confirmar', 'cancelar']);
 </script>
 
 <template>
-    <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+    <div v-if="mostrar" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
         <div class="bg-white rounded-lg shadow-lg p-6 max-w-sm w-full">
-            <h2 class="text-lg font-bold mb-4">Confirmación</h2>
+            <h2 class="text-lg font-bold mb-4">Confirme</h2>
             <p class="text-gray-700 mb-6">{{ mensaje }}</p>
             <div class="flex justify-end space-x-4">
                 <button class="bg-gray-300 text-gray-800 py-1 px-3 rounded-md hover:bg-gray-400" @click="$emit('cancelar')">Cancelar</button>
