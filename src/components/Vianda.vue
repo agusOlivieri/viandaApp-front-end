@@ -1,4 +1,5 @@
 <script setup>
+
 const viandas = [
                 {
                     id: 1,
@@ -28,10 +29,9 @@ const viandas = [
             <div class="mt-4 flex justify-between items-center">
                 <span class="text-xl font-semibold text-blue-700">$800</span>
                 <button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-700">
-                    Agregar
+                    Seleccionar
                 </button>
             </div>
         </div>
-
     </div>
 </template>
