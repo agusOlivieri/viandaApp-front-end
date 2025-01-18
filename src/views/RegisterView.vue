@@ -1,12 +1,15 @@
 <script setup>
 import { ref } from "vue";
 import axios from "axios";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
 const user = ref({
-  name: "",
+  username: "",
+  apellido: "",
   email: "",
   password: "",
-  role: "CLIENTE",
+  rol: "CLIENTE",
 });
 
 const register = async () => {
@@ -14,7 +17,7 @@ const register = async () => {
     const response = await axios.post("http://localhost:8080/api/auth/register", user.value);
     alert("Registro exitoso");
     console.log(response.data);
-    // Redirigir al login si es necesario
+    router.push("/")
   } catch (error) {
     console.error("Error en el registro:", error);
     alert("Hubo un problema con el registro. Por favor, intente de nuevo.");
@@ -35,9 +38,21 @@ const register = async () => {
                 name="name"
                 type="text"
                 required
-                v-model="user.name"
+                v-model="user.username"
                 class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                 placeholder="Nombre completo"
+              />
+            </div>
+            <div>
+              <label for="surname" class="sr-only">Apellido</label>
+              <input
+                id="surname"
+                name="surname"
+                type="text"
+                required
+                v-model="user.apellido"
+                class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                placeholder="Apellido"
               />
             </div>
             <div>

@@ -5,17 +5,17 @@ import { useRouter } from "vue-router";
 
 const router = useRouter();
 const credentials = ref({
-  email: "",
+  username: "",
   password: "",
 });
 
 const login = async () => {
   try {
     const response = await axios.post("http://localhost:8080/api/auth/login", credentials.value);
-    const token = response.data.token; // Cambia el nombre del atributo si el backend usa otro
-    localStorage.setItem("jwt", token); // Guardar el token en el localStorage
+    const token = response.data.token; 
+    localStorage.setItem("jwt", token);
     alert("Inicio de sesión exitoso");
-    router.push("/"); // Redirige al inicio u otra ruta después del login
+    router.push("/home"); 
   } catch (error) {
     console.error("Error al iniciar sesión:", error);
     alert("Credenciales inválidas. Por favor, intente nuevamente.");
@@ -34,9 +34,9 @@ const login = async () => {
               <input
                 id="email"
                 name="email"
-                type="email"
+                type="text"
                 required
-                v-model="credentials.email"
+                v-model="credentials.username"
                 class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                 placeholder="Correo Electrónico"
               />
