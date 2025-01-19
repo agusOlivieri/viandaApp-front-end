@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
+import { jwtDecode } from "jwt-decode";
 
 const router = useRouter();
 const credentials = ref({
@@ -12,10 +13,20 @@ const credentials = ref({
 const login = async () => {
   try {
     const response = await axios.post("http://localhost:8080/api/auth/login", credentials.value);
-    const token = response.data.token; 
+    const token = response.data.access_token; 
+
     localStorage.setItem("jwt", token);
     alert("Inicio de sesión exitoso");
-    router.push("/home"); 
+
+    const decodedToken = jwtDecode(token);
+    const role = decodedToken.role;
+
+    if (role === "CLIENTE") {
+      router.push("/ordenar");
+    } else if (role === "ADMINISTRADOR") {
+      router.push("/gestionar-pedidos");
+    }
+    
   } catch (error) {
     console.error("Error al iniciar sesión:", error);
     alert("Credenciales inválidas. Por favor, intente nuevamente.");

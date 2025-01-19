@@ -14,8 +14,8 @@ const router = createRouter({
       component: LoginView,
     },
     {
-      path: '/viandas',
-      name: 'viandas',
+      path: '/ordenar',
+      name: 'ordenar',
       component: OrderView,
     },
     {
