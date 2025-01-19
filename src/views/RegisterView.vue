@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
+import { jwtDecode } from "jwt-decode";
 
 const router = useRouter();
 const user = ref({
@@ -15,9 +16,19 @@ const user = ref({
 const register = async () => {
   try {
     const response = await axios.post("http://localhost:8080/api/auth/register", user.value);
+    const token = response.data.access_token; 
+
+    localStorage.setItem("jwt", token);
     alert("Registro exitoso");
-    console.log(response.data);
-    router.push("/")
+
+    const decodedToken = jwtDecode(token);
+    const role = decodedToken.role;
+
+    if (role === "CLIENTE") {
+      router.push("/ordenar");
+    } else if (role === "ADMINISTRADOR") {
+      router.push("/gestionar-pedidos");
+    }
   } catch (error) {
     console.error("Error en el registro:", error);
     alert("Hubo un problema con el registro. Por favor, intente de nuevo.");
