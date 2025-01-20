@@ -15,6 +15,8 @@ const login = async () => {
     const endpoint = "http://localhost:8080/api/auth/login";
     const access_token = await getTokens(endpoint, credentials.value);
 
+    alert("Inicio de sesión exitoso");
+
     const decodedToken = jwtDecode(access_token);
     const role = decodedToken.role;
 

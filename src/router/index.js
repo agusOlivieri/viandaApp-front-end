@@ -49,8 +49,6 @@ router.beforeEach((to, from, next) => {
 
     const decodedToken = jwtDecode(token);
     const userRole = decodedToken.role;
-    console.log("rol del token: ", userRole)
-    console.log("rol meta: ", to.meta.roles[0])
 
     if (to.meta.roles && to.meta.roles[0] !== userRole) {
       alert("No tienes permisos para acceder a esta página");

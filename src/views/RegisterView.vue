@@ -18,6 +18,8 @@ const register = async () => {
     const endpoint = "http://localhost:8080/api/auth/register";
     const access_token = await getTokens(endpoint, user.value);
 
+    alert("Registro exitoso");
+
     const decodedToken = jwtDecode(access_token);
     const role = decodedToken.role;
 

@@ -7,7 +7,7 @@ export const getTokens = async (endpoint, requestBody) => {
     
         localStorage.setItem("access_token", access_token);
         localStorage.setItem("refresh_token", refresh_token);
-        alert("Registro exitoso");
+
         return access_token;
 
       } catch (error) {
