@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from "vue";
-import axios from "axios";
 import { useRouter } from "vue-router";
 import { jwtDecode } from "jwt-decode";
+import { getTokens } from "@/services/authService";
 
 const router = useRouter();
 const credentials = ref({
@@ -12,13 +12,10 @@ const credentials = ref({
 
 const login = async () => {
   try {
-    const response = await axios.post("http://localhost:8080/api/auth/login", credentials.value);
-    const token = response.data.access_token; 
+    const endpoint = "http://localhost:8080/api/auth/login";
+    const access_token = getTokens(endpoint, credentials.value);
 
-    localStorage.setItem("jwt", token);
-    alert("Inicio de sesión exitoso");
-
-    const decodedToken = jwtDecode(token);
+    const decodedToken = jwtDecode(access_token);
     const role = decodedToken.role;
 
     if (role === "CLIENTE") {
