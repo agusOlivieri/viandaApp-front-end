@@ -16,7 +16,7 @@ const user = ref({
 const register = async () => {
   try {
     const endpoint = "http://localhost:8080/api/auth/register";
-    const access_token = getTokens(endpoint, user.value);
+    const access_token = await getTokens(endpoint, user.value);
 
     const decodedToken = jwtDecode(access_token);
     const role = decodedToken.role;

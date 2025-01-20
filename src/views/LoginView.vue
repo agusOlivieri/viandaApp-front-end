@@ -13,7 +13,7 @@ const credentials = ref({
 const login = async () => {
   try {
     const endpoint = "http://localhost:8080/api/auth/login";
-    const access_token = getTokens(endpoint, credentials.value);
+    const access_token = await getTokens(endpoint, credentials.value);
 
     const decodedToken = jwtDecode(access_token);
     const role = decodedToken.role;
