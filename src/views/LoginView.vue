@@ -22,7 +22,7 @@ const login = async () => {
     const role = decodedToken.role;
 
     if (role === "CLIENTE") {
-      router.push("/ordenar");
+      router.push("/home");
     } else if (role === "ADMINISTRADOR") {
       router.push("/gestionar-pedidos");
     }
