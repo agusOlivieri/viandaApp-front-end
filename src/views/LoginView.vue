@@ -3,6 +3,7 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { jwtDecode } from "jwt-decode";
 import { getTokens } from "@/services/authService";
+import { useUsuarioStore } from "@/stores/usuario";
 
 const router = useRouter();
 const credentials = ref({
@@ -11,18 +12,19 @@ const credentials = ref({
 });
 
 const login = async () => {
+  const usuarioStore = useUsuarioStore();
+
   try {
     const endpoint = "http://localhost:8080/api/auth/login";
     const access_token = await getTokens(endpoint, credentials.value);
-
+    
+    usuarioStore.setToken(access_token);
+    
     alert("Inicio de sesión exitoso");
 
-    const decodedToken = jwtDecode(access_token);
-    const role = decodedToken.role;
-
-    if (role === "CLIENTE") {
+    if (usuarioStore.rol === "CLIENTE") {
       router.push("/home");
-    } else if (role === "ADMINISTRADOR") {
+    } else if (usuarioStore.rol === "ADMINISTRADOR") {
       router.push("/gestionar-pedidos");
     }
     
