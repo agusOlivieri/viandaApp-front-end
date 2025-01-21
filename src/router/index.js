@@ -18,7 +18,7 @@ const router = createRouter({
       path: '/ordenar',
       name: 'ordenar',
       component: OrderView,
-      meta: { requiresAuth: true, roles: ["CLIENTE"] },
+      meta: { requiresAuth: true, roles: ["ROLE_CLIENTE"] },
     },
     {
       path: '/:catchAll(.*)',

@@ -1,10 +1,18 @@
 <script setup>
 import { ref } from 'vue';
 import ConfirmacionModal from '@/components/ConfirmacionModal.vue';
+import { newPedido } from '@/services/pedidoService';
+import { useUsuarioStore } from '@/stores/usuario';
 
 const mostrarConfirmacion = ref(false);
 const mensajeConfirmacion = ref('');
 const viandaSeleccionada = ref(null);
+
+const pedido = ref({
+    usuarioId: "",
+    viandaId: "",
+    fechaHora: "",
+})
 
 const seleccionarVianda = (vianda) => {
     viandaSeleccionada.value = vianda;
@@ -13,9 +21,20 @@ const seleccionarVianda = (vianda) => {
 };
 
 const confirmarSeleccion = () => {
-    alert(`Ha seleccionado: ${viandaSeleccionada.value.title}`)
-    mostrarConfirmacion.value = false
-    viandaSeleccionada.value = null
+    const usuarioStore = useUsuarioStore();
+
+    pedido.usuarioId = usuarioStore.usuarioId;
+    pedido.fechaHora = Date.now();
+    pedido.viandaId = viandaSeleccionada.id;
+
+    const nuevoPedido = newPedido(pedido);
+
+    if (nuevoPedido) {
+        alert(`Ha seleccionado: ${viandaSeleccionada.value.title}`)
+        mostrarConfirmacion.value = false
+        viandaSeleccionada.value = null
+    }
+
 };
 
 const cancelarSeleccion = () => {
