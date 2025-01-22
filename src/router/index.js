@@ -4,6 +4,7 @@ import NotFoundView from '@/views/NotFoundView.vue'
 import OrderView from '@/views/OrderView.vue'
 import RegisterView from '@/views/RegisterView.vue'
 import LoginView from '@/views/LoginView.vue'
+import AdminHomeView from '@/views/AdminHomeView.vue'
 import { useUsuarioStore } from '@/stores/usuario'
 
 const router = createRouter({
@@ -34,6 +35,11 @@ const router = createRouter({
       path: '/client/home',
       name: 'client-home',
       component: ClientHomeView,
+    },
+    {
+      path: '/admin/home',
+      name: 'admin-home',
+      component: AdminHomeView,
     },
     
   ],
