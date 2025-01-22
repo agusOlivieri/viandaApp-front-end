@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import ConfirmacionModal from '@/components/ConfirmacionModal.vue';
-import { newPedido } from '@/services/pedidoService';
+import { getFormattedDateTime, newPedido } from '@/services/pedidoService';
 import { useUsuarioStore } from '@/stores/usuario';
 
 const mostrarConfirmacion = ref(false);
@@ -24,8 +24,10 @@ const confirmarSeleccion = () => {
     const usuarioStore = useUsuarioStore();
 
     pedido.usuarioId = usuarioStore.usuarioId;
-    pedido.fechaHora = Date.now();
-    pedido.viandaId = viandaSeleccionada.id;
+    pedido.fechaHora = getFormattedDateTime();
+    pedido.viandaId = viandaSeleccionada.value.id;
+
+    console.log("requestBody: ", pedido)
 
     const nuevoPedido = newPedido(pedido);
 
