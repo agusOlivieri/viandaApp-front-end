@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import ClientHomeView from '../views/ClientHomeView.vue'
 import NotFoundView from '@/views/NotFoundView.vue'
 import OrderView from '@/views/OrderView.vue'
 import RegisterView from '@/views/RegisterView.vue'
@@ -15,7 +15,7 @@ const router = createRouter({
       component: LoginView,
     },
     {
-      path: '/ordenar',
+      path: '/client/ordenar',
       name: 'ordenar',
       component: OrderView,
       meta: { requiresAuth: true, roles: ["ROLE_CLIENTE"] },
@@ -31,9 +31,9 @@ const router = createRouter({
       component: RegisterView,
     },
     {
-      path: '/home',
-      name: 'home',
-      component: HomeView,
+      path: '/client/home',
+      name: 'client-home',
+      component: ClientHomeView,
     },
     
   ],
@@ -45,7 +45,7 @@ router.beforeEach((to, from, next) => {
 
   if (to.meta.requiresAuth) {
     if (!token) {
-      return next("/login");
+      return next("/");
     }
 
     if (to.meta.roles && to.meta.roles[0] !== usuarioStore.rol) {
