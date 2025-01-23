@@ -5,6 +5,7 @@ import OrderView from '@/views/OrderView.vue'
 import RegisterView from '@/views/RegisterView.vue'
 import LoginView from '@/views/LoginView.vue'
 import AdminHomeView from '@/views/AdminHomeView.vue'
+import ViandasView from '@/views/ViandasView.vue'
 import { useUsuarioStore } from '@/stores/usuario'
 
 const router = createRouter({
@@ -40,6 +41,11 @@ const router = createRouter({
       path: '/admin/home',
       name: 'admin-home',
       component: AdminHomeView,
+    },
+    {
+      path: '/admin/viandas',
+      name: 'admin-viandas',
+      component: ViandasView,
     },
     
   ],
