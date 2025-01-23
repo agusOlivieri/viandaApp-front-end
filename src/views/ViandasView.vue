@@ -4,6 +4,9 @@ import ViandaAppTable from '@/components/ViandaAppTable.vue';
 
 <template>
     <section id="viandas">
-        <ViandaAppTable />
+        <ViandaAppTable
+        :columns="['id', 'nombre', 'descripcion', 'precio']"
+         endpoint="http://localhost:8080/api/viandas" 
+        />
     </section>
 </template>

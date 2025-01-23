@@ -1,5 +1,6 @@
 <script setup>
 import axios from "axios";
+import { ref, watch, onMounted } from "vue";
 
 defineProps({
     endpoint: {
@@ -13,19 +14,24 @@ defineProps({
     queryParams: {
         type: Object,
         default: () => ({}),
-    },
+    }
 })
+
+console.log("Columnas: ", columns)
+console.log("endpoint desde props: ", endpoint)
 
 const data = ref([]);
 const loading = ref(false);
 const error = ref(null);
 
 const fetchData = async () => {
-    this.loading = true;
-    this.error = null;
+    loading.value = true;
+    error.value = null;
+
+    console.log("endpoint: ", endpoint)
 
     try {
-        const response = await axios.get(this.enpoint, {
+        const response = await axios.get(endpoint, {
             params: queryParams,
         });
         data.value = response.data;
@@ -38,7 +44,7 @@ const fetchData = async () => {
 
 watch(() => queryParams, fetchData, { deep: true })
 
-onMounted(fetchData);
+// onMounted(fetchData);
 
 </script>
 
