@@ -26,9 +26,9 @@ const register = async () => {
     alert("Registro exitoso");
 
     if (usuarioStore.rol === "ROL_CLIENTE") {
-      router.push("/home");
+      router.push("/client/home");
     } else if (usuarioStore.rol === "ROL_ADMINISTRADOR") {
-      router.push("/gestionar-pedidos");
+      router.push("/admin/home");
     }
   } catch (error) {
     console.error("Error en el registro:", error);
