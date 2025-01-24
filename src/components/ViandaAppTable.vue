@@ -2,7 +2,7 @@
 import axios from "axios";
 import { ref, watch, onMounted } from "vue";
 
-defineProps({
+const props = defineProps({
     endpoint: {
         type: String,
         required: true,
@@ -17,8 +17,7 @@ defineProps({
     }
 })
 
-console.log("Columnas: ", columns)
-console.log("endpoint desde props: ", endpoint)
+const { endpoint, columns, queryParams } = props;
 
 const data = ref([]);
 const loading = ref(false);
@@ -42,9 +41,9 @@ const fetchData = async () => {
     }
 }
 
-watch(() => queryParams, fetchData, { deep: true })
+onMounted(fetchData);
 
-// onMounted(fetchData);
+watch(() => queryParams, fetchData, { deep: true })
 
 </script>
 
