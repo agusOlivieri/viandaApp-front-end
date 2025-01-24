@@ -25,9 +25,9 @@ const register = async () => {
 
     alert("Registro exitoso");
 
-    if (usuarioStore.rol === "ROL_CLIENTE") {
+    if (usuarioStore.rol === "ROLE_CLIENTE") {
       router.push("/client/home");
-    } else if (usuarioStore.rol === "ROL_ADMINISTRADOR") {
+    } else if (usuarioStore.rol === "ROLE_ADMINISTRADOR") {
       router.push("/admin/home");
     }
   } catch (error) {
@@ -97,12 +97,12 @@ const register = async () => {
             <label for="role" class="block text-sm font-medium text-gray-700">Rol</label>
             <select
               id="role"
-              v-model="user.role"
+              v-model="user.rol"
               required
               class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
             >
               <option value="CLIENTE">Cliente</option>
-              <option value="ADMIN">Administrador</option>
+              <option value="ADMINISTRADOR">Administrador</option>
             </select>
           </div>
   
