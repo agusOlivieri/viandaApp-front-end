@@ -8,6 +8,7 @@ import HomeViewBtn from '@/components/HomeViewBtn.vue';
         <h1 class="text-3xl font-bold text-center mt-4">Vea sus pedidos</h1>
         <div class="flex-grow flex justify-center items-center">
             <HomeViewBtn link="/admin/pedidos" linkText="Ver Pedidos" />
+            <HomeViewBtn link="/admin/viandas" linkText="Ver Viandas" />
         </div>
   </section>
 </template>

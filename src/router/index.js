@@ -46,6 +46,7 @@ const router = createRouter({
       path: '/admin/viandas',
       name: 'admin-viandas',
       component: ViandasView,
+      meta: { requiresAuth: true, roles: ["ROLE_ADMINISTRADOR"] },
     },
     
   ],
