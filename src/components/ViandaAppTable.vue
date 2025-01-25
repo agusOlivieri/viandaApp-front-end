@@ -1,6 +1,7 @@
 <script setup>
 import axios from "axios";
 import { ref, watch, onMounted } from "vue";
+import NuevoBtn from '@/components/NuevoBtn.vue';
 
 const props = defineProps({
     endpoint: {
@@ -65,6 +66,9 @@ watch(() => queryParams, fetchData, { deep: true })
                 </tr>
             </tbody>
         </table>
+        <div class="w-32 mt-2">
+            <NuevoBtn link="/client/viandas/new" text="Nuevo"/>
+        </div>
 
         <div v-if="loading" class="text-center text-gray-500 mt-4">Cargando...</div>
         <div v-if="error" class="text-center text-gray-500 mt-4">{{ error }}</div>
