@@ -5,6 +5,8 @@ import ViandaAppTable from '@/components/ViandaAppTable.vue';
 
 <template>
     <section id="viandas">
-        <ViandaAppTable :columns="['id', 'nombre', 'descripcion', 'precio']" :endpoint="'http://localhost:8080/api/viandas'" :queryParams="{}" />
+        <div class="w-full flex justify-center">
+            <ViandaAppTable :columns="['id', 'nombre', 'descripcion', 'precio']" :endpoint="'http://localhost:8080/api/viandas'" :queryParams="{}" />
+        </div>
     </section>
 </template>

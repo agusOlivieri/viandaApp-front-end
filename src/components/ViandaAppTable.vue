@@ -48,7 +48,7 @@ watch(() => queryParams, fetchData, { deep: true })
 </script>
 
 <template>
-    <div>
+    <div class="w-[800px] mt-10">
         <table class="table-auto w-full border-collapse border border-gray-300 shadow-lg">
             <thead class="bg-gray-100">
                 <tr>
