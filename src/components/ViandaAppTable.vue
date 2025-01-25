@@ -67,7 +67,7 @@ watch(() => queryParams, fetchData, { deep: true })
             </tbody>
         </table>
         <div class="w-32 mt-2">
-            <NuevoBtn link="/client/viandas/new" text="Nuevo"/>
+            <NuevoBtn link="/admin/viandas/new" text="Nuevo"/>
         </div>
 
         <div v-if="loading" class="text-center text-gray-500 mt-4">Cargando...</div>

@@ -37,7 +37,7 @@ const crearVianda = async () => {
 </script>
 
 <template>
-    <div class="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
+    <div class="w-[600px] mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
         <h2 class="text-xl font-bold mb-4">Crear Nueva Vianda</h2>
         <form @submit.prevent="crearVianda">
             <div class="mb-4">
@@ -78,6 +78,13 @@ const crearVianda = async () => {
                 required
                 />
             </div>
+
+            <button type="submit" class="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg shadow hover:bg-blue-600 transition" :disabled="loading">
+                {{ loading ? "Creando..." : "Crear Vianda" }}
+            </button>
         </form>
+
+        <p v-if="successMessage" class="mt-4 text-green-600 font-medium">{{ successMessage }}</p>
+        <p v-if="errorMessage" class="mt-4 text-red-600 font-medium">{{ errorMessage }}</p>
     </div>
 </template>
