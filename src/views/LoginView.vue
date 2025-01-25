@@ -24,9 +24,9 @@ const login = async () => {
     alert("Inicio de sesión exitoso");
 
     if (usuarioStore.rol === "ROLE_CLIENTE") {
-      router.push("/home");
+      router.push("/client/home");
     } else if (usuarioStore.rol === "ROLE_ADMINISTRADOR") {
-      router.push("/gestionar-pedidos");
+      router.push("/admin/home");
     }
     
   } catch (error) {

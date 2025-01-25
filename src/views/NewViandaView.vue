@@ -19,7 +19,8 @@ const crearVianda = async () => {
     errorMessage.value = "";
 
     try {
-        const response = await axios.post("/api/viandas/new", vianda.value);
+        const token = localStorage.getItem("access_token")
+        const response = await axios.post("http://localhost:8080/api/viandas/new", vianda.value, { headers: { Authorization: `Bearer ${token}` } });
         successMessage.value = "¡Vianda creada exitosamente!";
 
         vianda.value = {
