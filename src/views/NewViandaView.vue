@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import axios from "axios";
+import VolverBtn from '@/components/VolverBtn.vue';
 
 const vianda = ref({
     nombre: "",
@@ -84,8 +85,11 @@ const crearVianda = async () => {
                 {{ loading ? "Creando..." : "Crear Vianda" }}
             </button>
         </form>
-
+        
         <p v-if="successMessage" class="mt-4 text-green-600 font-medium">{{ successMessage }}</p>
         <p v-if="errorMessage" class="mt-4 text-red-600 font-medium">{{ errorMessage }}</p>
+    </div>
+    <div class="mt-3 ms-20">
+        <VolverBtn />
     </div>
 </template>
