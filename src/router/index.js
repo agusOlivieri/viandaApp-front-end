@@ -21,7 +21,7 @@ const router = createRouter({
       path: '/client/ordenar',
       name: 'ordenar',
       component: OrderView,
-      meta: { requiresAuth: true, roles: ["ROLE_CLIENTE"] },
+      // meta: { requiresAuth: true, roles: ["ROLE_CLIENTE"] },
     },
     {
       path: '/:catchAll(.*)',
@@ -47,7 +47,7 @@ const router = createRouter({
       path: '/admin/viandas',
       name: 'admin-viandas',
       component: ViandasView,
-      meta: { requiresAuth: true, roles: ["ROLE_ADMINISTRADOR"] },
+      // meta: { requiresAuth: true, roles: ["ROLE_ADMINISTRADOR"] },
     },
     {
       path: '/admin/viandas/new',

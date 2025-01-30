@@ -39,7 +39,7 @@ const crearVianda = async () => {
 </script>
 
 <template>
-    <div class="w-[600px] mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
+    <div class="w-full mt-8 p-6 bg-white rounded-lg shadow-md">
         <h2 class="text-xl font-bold mb-4">Crear Nueva Vianda</h2>
         <form @submit.prevent="crearVianda">
             <div class="mb-4">
@@ -89,7 +89,5 @@ const crearVianda = async () => {
         <p v-if="successMessage" class="mt-4 text-green-600 font-medium">{{ successMessage }}</p>
         <p v-if="errorMessage" class="mt-4 text-red-600 font-medium">{{ errorMessage }}</p>
     </div>
-    <div class="mt-3 ms-20">
-        <VolverBtn />
-    </div>
+    <VolverBtn />
 </template>

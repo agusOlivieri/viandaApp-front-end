@@ -4,7 +4,7 @@ import Vianda from '@/components/Vianda.vue'
 
 <template>
     <section id="order" class="my-4 flex justify-center">
-        <div class="w-3/4 max-w-2xl bg-white rounded-lg shadow-lg p-6">
+        <div class="w-full max-sm:w-3/4 bg-white rounded-lg shadow-lg p-6">
             <h2 class="text-2xl font-bold text-center mb-6">Elija Su Vianda</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 <Vianda></Vianda>
