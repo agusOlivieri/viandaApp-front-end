@@ -63,7 +63,7 @@ const register = async () => {
                 type="text"
                 required
                 v-model="user.apellido"
-                class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                 placeholder="Apellido"
               />
             </div>
@@ -115,6 +115,12 @@ const register = async () => {
             </button>
           </div>
         </form>
+        <p class="mt-6 text-center text-sm text-gray-600">
+          ¿Ya tienes una cuenta?
+          <router-link to="/" class="font-medium text-blue-600 hover:text-blue-500">
+            Inicia sesión aquí
+          </router-link>
+        </p>
       </div>
     </div>
   </template>
