@@ -8,6 +8,7 @@ import AdminHomeView from '@/views/AdminHomeView.vue'
 import ViandasView from '@/views/ViandasView.vue'
 import { useUsuarioStore } from '@/stores/usuario'
 import NewViandaView from '@/views/NewViandaView.vue'
+import PedidosView from '@/views/PedidosView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -53,6 +54,12 @@ const router = createRouter({
       path: '/admin/viandas/new',
       name: 'new-vianda',
       component: NewViandaView,
+      // meta: { requiresAuth: true, roles: ["ROLE_ADMINISTRADOR"] },
+    },
+    {
+      path: '/admin/pedidos',
+      name: 'pedidos',
+      component: PedidosView,
       // meta: { requiresAuth: true, roles: ["ROLE_ADMINISTRADOR"] },
     },
     
