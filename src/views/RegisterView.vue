@@ -12,6 +12,7 @@ const user = ref({
   email: "",
   password: "",
   rol: "CLIENTE",
+  area: "Dis",
 });
 
 const register = async () => {
@@ -38,7 +39,7 @@ const register = async () => {
 </script>
 
 <template>
-    <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="min-h-screen flex items-center justify-center py-8 px-4 sm:px-6 lg:px-8">
       <div class="max-w-md w-full space-y-8 bg-white p-8 rounded-lg shadow-lg">
         <h2 class="text-center text-3xl font-extrabold text-gray-900">Crear Cuenta</h2>
         <form @submit.prevent="register" class="mt-8 space-y-6">
@@ -103,6 +104,20 @@ const register = async () => {
             >
               <option value="CLIENTE">Cliente</option>
               <option value="ADMINISTRADOR">Administrador</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="area" class="block text-sm font-medium text-gray-700">Área</label>
+            <select
+              id="area"
+              v-model="user.area"
+              required
+              class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            >
+              <option value="Dis">Distribución</option>
+              <option value="RRHH">RRHH</option>
+              <option value="Mrd">Mantenimiento de redes</option>
             </select>
           </div>
   
