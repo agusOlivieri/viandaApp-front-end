@@ -1,19 +1,22 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { getTokens } from "@/services/authService";
 import { useUsuarioStore } from "@/stores/usuario";
-
+import axios from "axios";
 
 const router = useRouter();
+
 const user = ref({
   username: "",
   apellido: "",
   email: "",
   password: "",
   rol: "CLIENTE",
-  area: "Dis",
+  area: "",
 });
+
+const areas = ref([])
 
 const register = async () => {
   const usuarioStore = useUsuarioStore();
@@ -36,6 +39,19 @@ const register = async () => {
     alert("Hubo un problema con el registro. Por favor, intente de nuevo.");
   }
 };
+
+const fetchAreas = async () => {
+    try {
+      const endpoint = "http://localhost:8080/api/area";
+        const response = await axios.get(endpoint);
+        areas.value = response.data
+    } catch (error) {
+        console.error("Hubo un error al pedir las areas:", error);  
+    };
+};
+
+onMounted(fetchAreas)
+
 </script>
 
 <template>
@@ -115,9 +131,8 @@ const register = async () => {
               required
               class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
             >
-              <option value="Dis">Distribución</option>
-              <option value="RRHH">RRHH</option>
-              <option value="Mrd">Mantenimiento de redes</option>
+              <option value="" disabled>Seleccione su área</option>
+              <option v-for="area in areas" :key="area.id" :value="area.nombre">{{ area.nombre }}</option>
             </select>
           </div>
   
