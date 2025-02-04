@@ -9,6 +9,7 @@ import ViandasView from '@/views/ViandasView.vue'
 import { useUsuarioStore } from '@/stores/usuario'
 import NewViandaView from '@/views/NewViandaView.vue'
 import PedidosView from '@/views/PedidosView.vue'
+import DistribuidorasView from '@/views/DistribuidorasView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -21,7 +22,7 @@ const router = createRouter({
     {
       path: '/client/ordenar',
       name: 'ordenar',
-      component: OrderView,
+      component: DistribuidorasView,
       // meta: { requiresAuth: true, roles: ["ROLE_CLIENTE"] },
     },
     {
