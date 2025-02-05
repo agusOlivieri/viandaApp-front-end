@@ -9,7 +9,7 @@ const distribuidora = route.params.distribuidora;
 
 <template>
     <div>
-        <h1>Viandas de {{ distribuidora }}</h1>
+        <h1 class=" text-3xl font-bold text-center my-6">Viandas de {{ distribuidora }}</h1>
         <ViandasListing :distribuidora="distribuidora"/>
         <VolverBtn />
     </div>
