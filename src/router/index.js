@@ -63,6 +63,11 @@ const router = createRouter({
       component: PedidosView,
       // meta: { requiresAuth: true, roles: ["ROLE_ADMINISTRADOR"] },
     },
+    {
+      path: '/client/ordenar/:distribuidora',
+      name: 'ordenar-vianda',
+      component: OrderView,
+    }
     
   ],
 })
