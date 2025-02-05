@@ -20,8 +20,8 @@ const router = createRouter({
       component: LoginView,
     },
     {
-      path: '/client/ordenar',
-      name: 'ordenar',
+      path: '/client/distribuidoras',
+      name: 'distribuidoras',
       component: DistribuidorasView,
       // meta: { requiresAuth: true, roles: ["ROLE_CLIENTE"] },
     },
@@ -65,7 +65,7 @@ const router = createRouter({
     },
     {
       path: '/client/ordenar/:distribuidora',
-      name: 'ordenar-vianda',
+      name: 'ordenar',
       component: OrderView,
     }
     
