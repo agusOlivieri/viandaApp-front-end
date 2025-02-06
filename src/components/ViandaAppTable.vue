@@ -2,6 +2,7 @@
 import axios from "axios";
 import { ref, watch, onMounted } from "vue";
 import NuevoBtn from '@/components/NuevoBtn.vue';
+import EditBtn from '@/components/EditBtn.vue';
 
 const props = defineProps({
     endpoint: {
@@ -44,8 +45,12 @@ const fetchData = async () => {
     }
 }
 
-onMounted(fetchData);
+const editVianda = (id) => {
+    
+}
 
+
+onMounted(fetchData);
 watch(() => queryParams, fetchData, { deep: true })
 
 </script>
@@ -58,12 +63,17 @@ watch(() => queryParams, fetchData, { deep: true })
                     <th v-for="column in columns" :key="column" class="border border-gray-300 px-4 py-2 text-left font-medium text-gray-700">
                         {{ column }}
                     </th>
+                    <th class="border border-gray-300 px-4 py-2 text-left font-medium text-gray-700">Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="row in data" :key="row.id" class="hover:bg-gray-50">
                     <td v-for="column in columns" :key="column" class="border border-gray-300 px-4 py-2 text-gray-600">
                         {{ row[column] }}
+                    </td>
+                    <td class="border border-gray-300 px-4 py-2 flex gap-2">
+                        <EditBtn :id="row.id" @edit="" />
+
                     </td>
                 </tr>
             </tbody>
