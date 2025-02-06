@@ -31,10 +31,10 @@ const fetchData = async () => {
     console.log("endpoint: ", endpoint)
 
     try {
-        const token = localStorage.getItem("access_token")
+        // const token = localStorage.getItem("access_token")
         const response = await axios.get(endpoint, {
             params: queryParams,
-            headers: { Authorization: `Bearer ${token}` } 
+            // headers: { Authorization: `Bearer ${token}` } 
         });
         data.value = response.data;
     } catch (err) {

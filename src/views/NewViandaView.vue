@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import axios from "axios";
 import VolverBtn from '@/components/VolverBtn.vue';
 
@@ -9,6 +9,8 @@ const vianda = ref({
     precio: 0,
     distribuidora: "",
 });
+
+const distribuidoras = ref([]);
 
 const loading = ref(false);
 const successMessage = ref("");
@@ -20,8 +22,12 @@ const crearVianda = async () => {
     errorMessage.value = "";
 
     try {
-        const token = localStorage.getItem("access_token")
-        const response = await axios.post("http://localhost:8080/api/viandas/new", vianda.value, { headers: { Authorization: `Bearer ${token}` } });
+        // const token = localStorage.getItem("access_token")
+        const response = await axios.post(
+            "http://localhost:8080/api/viandas/new",
+             vianda.value, 
+            //  { headers: { Authorization: `Bearer ${token}` } }
+        );
         successMessage.value = "¡Vianda creada exitosamente!";
 
         vianda.value = {
@@ -34,8 +40,21 @@ const crearVianda = async () => {
         errorMessage.value = "Error al crear la vianda: " + err.message;
     } finally {
         loading.value = false;
-    }
+    };
 };
+
+const fetchDistribuidoras = async () => {
+    try {
+        const endpoint = "http://localhost:8080/api/viandas/distribuidoras";
+        const response = await axios.get(endpoint);
+        distribuidoras.value = response.data;
+        
+    } catch (error) {
+        console.error("Hubo un error al pedir las distribuidoras: ", error.message);
+    };
+};
+
+onMounted(fetchDistribuidoras);
 </script>
 
 <template>
@@ -72,13 +91,15 @@ const crearVianda = async () => {
 
             <div class="mb-4">
                 <label for="distribuidora" class="block text-sm font-medium text-gray-700">Distribuidora</label>
-                <input
-                v-model="vianda.distribuidora"
-                type="text"
-                id="distribuidora"
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                required
-                />
+                <select
+                    v-model="vianda.distribuidora"
+                    id="distribuidora"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    required
+                >
+                    <option value="" disabled>Selecciona una distribuidora</option>
+                    <option v-for="distribuidora in distribuidoras" :key="distribuidora.id" :value="distribuidora.nombre">{{ distribuidora.nombre }}</option>
+                </select>
             </div>
 
             <button type="submit" class="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg shadow hover:bg-blue-600 transition" :disabled="loading">
