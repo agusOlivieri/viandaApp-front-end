@@ -3,6 +3,7 @@ import axios from "axios";
 import { ref, watch, onMounted } from "vue";
 import NuevoBtn from '@/components/NuevoBtn.vue';
 import EditBtn from '@/components/EditBtn.vue';
+import EditViandaModal from '@/components/EditViandaModal.vue';
 
 const props = defineProps({
     endpoint: {
@@ -25,6 +26,9 @@ const data = ref([]);
 const loading = ref(false);
 const error = ref(null);
 
+const modalOpen = ref(false);
+const selectedVianda = ref(null);
+
 const fetchData = async () => {
     loading.value = true;
     error.value = null;
@@ -42,12 +46,29 @@ const fetchData = async () => {
         error.value = "Error al cargar los datos: " + err.message;
     } finally {
         loading.value = false;
-    }
-}
+    };
+};
 
-const editVianda = (id) => {
-    
-}
+const editVianda = (vianda) => {
+    selectedVianda.value = { ...vianda };
+    modalOpen.value = true;
+};
+
+const updateVianda = async (updatedVianda) => {
+    try {
+        // const token = localStorage.getItem("access_token")
+        const endpoint = "http://localhost:8080/api/viandas/update";
+        const response = await axios.put(
+            endpoint, 
+            updatedVianda
+            //  { headers: { Authorization: `Bearer ${token}` } }
+        );
+        
+
+    } catch (error) {
+        console.error("Error al intentar actualizar la vianda", error.message);
+    };
+};
 
 
 onMounted(fetchData);
@@ -72,12 +93,19 @@ watch(() => queryParams, fetchData, { deep: true })
                         {{ row[column] }}
                     </td>
                     <td class="border border-gray-300 px-4 py-2 flex gap-2">
-                        <EditBtn :id="row.id" @edit="" />
-
+                        <EditBtn @edit="editVianda(row)" />
                     </td>
                 </tr>
             </tbody>
         </table>
+
+        <EditViandaModal 
+            :isOpen="modalOpen"
+            :vianda="selectedVianda"
+            @close="modalOpen = false"
+            @update="updateVianda"
+        />
+
         <div class="w-32 mt-2">
             <NuevoBtn link="/admin/viandas/new" text="Nuevo"/>
         </div>

@@ -1,5 +1,5 @@
 <script setup>
-import { DefineProps, defineEmits, ref, watch } from 'vue';
+import { defineEmits, ref, watch } from 'vue';
 
 const props = defineProps({
     isOpen: Boolean,
