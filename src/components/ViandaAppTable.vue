@@ -64,6 +64,12 @@ const updateVianda = async (updatedVianda) => {
             //  { headers: { Authorization: `Bearer ${token}` } }
         );
         
+        if (response.status === 200) {
+            modalOpen.value = false;
+            fetchData();
+        } else {
+            console.error("Error al actualizar la vianda");
+        }
 
     } catch (error) {
         console.error("Error al intentar actualizar la vianda", error.message);
