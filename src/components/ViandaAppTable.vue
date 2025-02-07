@@ -3,6 +3,7 @@ import axios from "axios";
 import { ref, watch, onMounted } from "vue";
 import NuevoBtn from '@/components/NuevoBtn.vue';
 import EditBtn from '@/components/EditBtn.vue';
+import DeleteBtn from '@/components/DeleteBtn.vue';
 import EditViandaModal from '@/components/EditViandaModal.vue';
 
 const props = defineProps({
@@ -32,8 +33,6 @@ const selectedVianda = ref(null);
 const fetchData = async () => {
     loading.value = true;
     error.value = null;
-
-    console.log("endpoint: ", endpoint)
 
     try {
         // const token = localStorage.getItem("access_token")
@@ -76,6 +75,21 @@ const updateVianda = async (updatedVianda) => {
     };
 };
 
+const deleteVianda = async (id) => {
+    try {
+        const endpoint = `http://localhost:8080/api/viandas/${id}`;
+        const response = await axios.delete(endpoint);
+        
+        if (response.status === 200) {
+            fetchData();
+        } else {
+            console.error("Error al eliminar la vianda");
+        }
+    } catch (error) {
+        console.error("Error al intentar eliminar la vianda:", error.message)
+    }
+} 
+
 
 onMounted(fetchData);
 watch(() => queryParams, fetchData, { deep: true })
@@ -100,6 +114,7 @@ watch(() => queryParams, fetchData, { deep: true })
                     </td>
                     <td class="border border-gray-300 px-4 py-2 flex gap-2">
                         <EditBtn @edit="editVianda(row)" />
+                        <DeleteBtn @delete="deleteVianda(row.id)"/>
                     </td>
                 </tr>
             </tbody>
