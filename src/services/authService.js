@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const getTokens = async (endpoint, requestBody) => {
+    console.log(requestBody)
     try {
         const response = await axios.post(endpoint, requestBody);
         const { access_token, refresh_token } = response.data; 

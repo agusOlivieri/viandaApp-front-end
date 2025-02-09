@@ -7,31 +7,50 @@ import axios from "axios";
 
 const router = useRouter();
 
+const form = ref({
+  rol: "",
+})
+
 const user = ref({
   username: "",
   apellido: "",
   email: "",
   password: "",
-  rol: "CLIENTE",
   area: "",
+  distribuidora: "",
 });
 
-const areas = ref([])
+const areas = ref([]);
+const distribuidoras = ref([]);
 
 const register = async () => {
   const usuarioStore = useUsuarioStore();
-
+  
   try {
-    const endpoint = "http://localhost:8080/api/auth/register";
-    const access_token = await getTokens(endpoint, user.value);
+    let endpoint = "";
+    let requestData = {
+      username: user.value.username,
+      apellido: user.value.apellido,
+      email: user.value.email,
+      password: user.value.password
+    };
 
+    if (form.value.rol === 'CLIENTE') {
+      endpoint = "http://localhost:8080/api/auth/register/cliente"
+      requestData.area = user.value.area;
+    } else if (form.value.rol === 'ADMINISTRADOR') {
+      endpoint = "http://localhost:8080/api/auth/register/admin"
+      requestData.distribuidora = user.value.distribuidora;
+    }
+
+    const access_token = await getTokens(endpoint, requestData)
     usuarioStore.setToken(access_token);
 
     alert("Registro exitoso");
 
-    if (usuarioStore.rol === "ROLE_CLIENTE") {
+    if (usuarioStore.area) {
       router.push("/client/home");
-    } else if (usuarioStore.rol === "ROLE_ADMINISTRADOR") {
+    } else if (usuarioStore.distribuidora) {
       router.push("/admin/home");
     }
   } catch (error) {
@@ -50,7 +69,18 @@ const fetchAreas = async () => {
     };
 };
 
-onMounted(fetchAreas)
+const fetchDistribuidoras = async () => {
+    try {
+      const endpoint = "http://localhost:8080/api/viandas/distribuidoras";
+        const response = await axios.get(endpoint);
+        distribuidoras.value = response.data
+    } catch (error) {
+        console.error("Hubo un error al pedir las distribuidoras:", error);  
+    };
+};
+
+onMounted(fetchAreas);
+onMounted(fetchDistribuidoras);
 
 </script>
 
@@ -60,6 +90,21 @@ onMounted(fetchAreas)
         <h2 class="text-center text-3xl font-extrabold text-gray-900">Crear Cuenta</h2>
         <form @submit.prevent="register" class="mt-8 space-y-6">
           <div class="rounded-md shadow-sm -space-y-px">
+            
+            <div class="mb-4">
+              <label for="role" class="block text-sm font-medium text-gray-700">Rol</label>
+              <select
+                id="role"
+                v-model="form.rol"
+                required
+                class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              >
+                <option value="" disabled>Seleccione su rol</option>
+                <option value="CLIENTE">Cliente</option>
+                <option value="ADMINISTRADOR">Administrador</option>
+              </select>
+            </div>
+            
             <div>
               <label for="name" class="sr-only">Nombre</label>
               <input
@@ -109,21 +154,8 @@ onMounted(fetchAreas)
               />
             </div>
           </div>
-  
-          <div>
-            <label for="role" class="block text-sm font-medium text-gray-700">Rol</label>
-            <select
-              id="role"
-              v-model="user.rol"
-              required
-              class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-            >
-              <option value="CLIENTE">Cliente</option>
-              <option value="ADMINISTRADOR">Administrador</option>
-            </select>
-          </div>
 
-          <div>
+          <div v-if="form.rol === 'CLIENTE'">
             <label for="area" class="block text-sm font-medium text-gray-700">Área</label>
             <select
               id="area"
@@ -133,6 +165,19 @@ onMounted(fetchAreas)
             >
               <option value="" disabled>Seleccione su área</option>
               <option v-for="area in areas" :key="area.id" :value="area.nombre">{{ area.nombre }}</option>
+            </select>
+          </div>
+
+          <div v-if="form.rol === 'ADMINISTRADOR'">
+            <label for="distribuidora" class="block text-sm font-medium text-gray-700">Distribuidora</label>
+            <select
+              id="distribuidora"
+              v-model="user.distribuidora"
+              required
+              class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            >
+              <option value="" disabled>Seleccione su distribuidora</option>
+              <option v-for="distribuidora in distribuidoras" :key="distribuidora.id" :value="distribuidora.nombre">{{ distribuidora.nombre }}</option>
             </select>
           </div>
   
