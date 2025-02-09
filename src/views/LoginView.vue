@@ -19,13 +19,12 @@ const login = async () => {
     const access_token = await getTokens(endpoint, credentials.value);
     
     usuarioStore.setToken(access_token);
-    console.log(usuarioStore.rol)
     
     alert("Inicio de sesión exitoso");
 
-    if (usuarioStore.rol === "ROLE_CLIENTE") {
+    if (usuarioStore.area) {
       router.push("/client/home");
-    } else if (usuarioStore.rol === "ROLE_ADMINISTRADOR") {
+    } else if (usuarioStore.distribuidora) {
       router.push("/admin/home");
     }
     

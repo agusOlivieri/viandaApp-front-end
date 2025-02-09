@@ -5,7 +5,8 @@ export const useUsuarioStore = defineStore("usuario", {
     state: () => ({
         token: null,
         usuarioId: null,
-        rol: null,
+        distribuidora: null,
+        area: null,
     }),
     actions: {
         setToken(token) {
@@ -13,12 +14,14 @@ export const useUsuarioStore = defineStore("usuario", {
 
             const decoded = jwtDecode(token);
             this.usuarioId = decoded.userId,
-            this.rol = decoded.role
+            this.distribuidora = decoded.distribuidora,
+            this.area = decoded.area
         },
         clearUsuario() {
             this.token = null;
             this.usuarioId = null;
-            this.rol = null;
+            this.distribuidora = null;
+            this.area = null;
             localStorage.removeItem('access_token');
         },
     },
