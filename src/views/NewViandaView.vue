@@ -2,15 +2,16 @@
 import { ref, onMounted } from 'vue';
 import axios from "axios";
 import VolverBtn from '@/components/VolverBtn.vue';
+import { useUsuarioStore } from '@/stores/usuario';
+
+const usuarioStore = useUsuarioStore();
 
 const vianda = ref({
     nombre: "",
     descripcion: "",
     precio: 0,
-    distribuidora: "",
+    distribuidora: usuarioStore.getDistribuidora(),
 });
-
-const distribuidoras = ref([]);
 
 const loading = ref(false);
 const successMessage = ref("");
@@ -42,19 +43,6 @@ const crearVianda = async () => {
         loading.value = false;
     };
 };
-
-const fetchDistribuidoras = async () => {
-    try {
-        const endpoint = "http://localhost:8080/api/viandas/distribuidoras";
-        const response = await axios.get(endpoint);
-        distribuidoras.value = response.data;
-        
-    } catch (error) {
-        console.error("Hubo un error al pedir las distribuidoras: ", error.message);
-    };
-};
-
-onMounted(fetchDistribuidoras);
 </script>
 
 <template>
@@ -87,19 +75,6 @@ onMounted(fetchDistribuidoras);
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 required
                 />
-            </div>
-
-            <div class="mb-4">
-                <label for="distribuidora" class="block text-sm font-medium text-gray-700">Distribuidora</label>
-                <select
-                    v-model="vianda.distribuidora"
-                    id="distribuidora"
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                    required
-                >
-                    <option value="" disabled>Selecciona una distribuidora</option>
-                    <option v-for="distribuidora in distribuidoras" :key="distribuidora.id" :value="distribuidora.nombre">{{ distribuidora.nombre }}</option>
-                </select>
             </div>
 
             <button type="submit" class="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg shadow hover:bg-blue-600 transition" :disabled="loading">
