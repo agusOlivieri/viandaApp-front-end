@@ -5,6 +5,7 @@ import NuevoBtn from '@/components/NuevoBtn.vue';
 import EditBtn from '@/components/EditBtn.vue';
 import DeleteBtn from '@/components/DeleteBtn.vue';
 import EditViandaModal from '@/components/EditViandaModal.vue';
+import { useUsuarioStore } from "@/stores/usuario";
 
 const props = defineProps({
     endpoint: {
@@ -31,12 +32,14 @@ const modalOpen = ref(false);
 const selectedVianda = ref(null);
 
 const fetchData = async () => {
+    const usuarioStore = useUsuarioStore();
     loading.value = true;
     error.value = null;
 
     try {
         // const token = localStorage.getItem("access_token")
-        const response = await axios.get(endpoint, {
+        const distribuidora = usuarioStore.getDistribuidora();
+        const response = await axios.get(endpoint + `/${distribuidora}`, {
             params: queryParams,
             // headers: { Authorization: `Bearer ${token}` } 
         });

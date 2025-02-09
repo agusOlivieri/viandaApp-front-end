@@ -24,5 +24,8 @@ export const useUsuarioStore = defineStore("usuario", {
             this.area = null;
             localStorage.removeItem('access_token');
         },
+        getDistribuidora() {
+            return this.distribuidora;
+        }
     },
 })
