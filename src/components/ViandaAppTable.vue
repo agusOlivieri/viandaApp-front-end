@@ -19,10 +19,13 @@ const props = defineProps({
     queryParams: {
         type: Object,
         default: () => ({}),
+    },
+    acciones: {
+        type: Boolean,
     }
 })
 
-const { endpoint, columns, queryParams } = props;
+const { endpoint, columns, queryParams, acciones } = props;
 
 const data = ref([]);
 const loading = ref(false);
@@ -107,7 +110,7 @@ watch(() => queryParams, fetchData, { deep: true })
                     <th v-for="column in columns" :key="column" class="border border-gray-300 px-4 py-2 text-left font-medium text-gray-700">
                         {{ column }}
                     </th>
-                    <th class="border border-gray-300 px-4 py-2 text-left font-medium text-gray-700">Acciones</th>
+                    <th v-if="acciones" class="border border-gray-300 px-4 py-2 text-left font-medium text-gray-700">Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -115,7 +118,7 @@ watch(() => queryParams, fetchData, { deep: true })
                     <td v-for="column in columns" :key="column" class="border border-gray-300 px-4 py-2 text-gray-600">
                         {{ row[column] }}
                     </td>
-                    <td class="border border-gray-300 px-4 py-2 flex gap-2">
+                    <td v-if="acciones" class="border border-gray-300 px-4 py-2 flex gap-2">
                         <EditBtn @edit="editVianda(row)" />
                         <DeleteBtn @delete="deleteVianda(row.id)"/>
                     </td>

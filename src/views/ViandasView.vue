@@ -6,7 +6,7 @@ import VolverBtn from '@/components/VolverBtn.vue';
 <template>
     <section id="viandas">
         <div class="w-full ">
-            <ViandaAppTable :columns="['nombre', 'descripcion', 'precio']" :endpoint="'http://localhost:8080/api/viandas'" :queryParams="{}" />
+            <ViandaAppTable :columns="['nombre', 'descripcion', 'precio']" :endpoint="'http://localhost:8080/api/viandas'" :queryParams="{}" :acciones="true" />
         </div>
         <div>
             <VolverBtn />
