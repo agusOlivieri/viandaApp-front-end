@@ -5,7 +5,9 @@ import { useUsuarioStore } from "@/stores/usuario";
 
 const usuarioStore = useUsuarioStore();
 
-const distribuidora = usuarioStore.getDistribuidora();
+// const distribuidora = usuarioStore.getDistribuidora();
+const distribuidora = 'Placeres';
+
 </script>
 
 <template>
