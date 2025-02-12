@@ -63,9 +63,9 @@ const editVianda = (item) => {
         <div class="w-full ">
             <ViandaAppTable :items="data" :acciones="true" :editVianda="editVianda">
                 <template #header>
-                    <th class="border border-gray-300 px-4 py-2 text-left font-medium text-center">Nombre</th>
-                    <th class="border border-gray-300 px-4 py-2 text-left font-medium text-center">Descripción</th>
-                    <th class="border border-gray-300 px-4 py-2 text-left font-medium text-center">Precio</th>
+                    <th class="border border-gray-300 px-4 py-2 font-medium text-center">Nombre</th>
+                    <th class="border border-gray-300 px-4 py-2 font-medium text-center">Descripción</th>
+                    <th class="border border-gray-300 px-4 py-2 font-medium text-center">Precio</th>
                 </template>
                 <template #body="{ item }">
                     <td class="border border-gray-300 px-4 py-2 text-gray-600">{{ item.nombre }}</td>
