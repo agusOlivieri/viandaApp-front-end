@@ -79,7 +79,7 @@ const deleteVianda = async (id) => {
 <template>
     <section id="viandas">
         <div class="w-full ">
-            <ViandaAppTable :items="data" :acciones="true" :editVianda="editVianda">
+            <ViandaAppTable :items="data" :acciones="true">
                 <template #header>
                     <th class="border border-gray-300 px-4 py-2 font-medium text-center">Nombre</th>
                     <th class="border border-gray-300 px-4 py-2 font-medium text-center">Descripción</th>
