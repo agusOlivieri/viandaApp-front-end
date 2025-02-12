@@ -2,8 +2,8 @@
 import { defineEmits, ref, watch } from 'vue';
 
 const props = defineProps({
-    isOpen: Boolean,
     vianda: Object,
+    isOpen: Boolean,
 });
 
 const emit = defineEmits(["close", "update"]);

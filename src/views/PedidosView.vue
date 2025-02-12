@@ -2,18 +2,48 @@
 import ViandaAppTable from '@/components/ViandaAppTable.vue';
 import VolverBtn from '@/components/VolverBtn.vue';
 import { useUsuarioStore } from "@/stores/usuario";
+import axios from 'axios';
+import { ref, onMounted } from 'vue';
 
 const usuarioStore = useUsuarioStore();
 
 // const distribuidora = usuarioStore.getDistribuidora();
-const distribuidora = 'Placeres';
+const distribuidora = 'placeres';
+const data = ref([]);
 
+const fetchData = async () => {
+    try {
+        // const token = localStorage.getItem("access_token")
+        const response = await axios.get(`http://localhost:8080/api/pedidos/${distribuidora}`, {
+            // headers: { Authorization: `Bearer ${token}` } 
+        });
+        data.value = response.data;
+        
+    } catch (err) {
+        console.error("Error al intentar pedir las viandas: ", err)
+    };
+};
+
+onMounted(fetchData);
 </script>
 
 <template>
     <section id="viandas">
         <div class="w-full ">
-            <ViandaAppTable :columns="['cliente', 'vianda', 'precio', 'fecha']" :endpoint="`http://localhost:8080/api/pedidos/${distribuidora}`" :queryParams="{}" :acciones="false"/>
+            <ViandaAppTable :items="data" :acciones="false">
+                <template #header>
+                    <th class="border border-gray-300 px-4 py-2 font-medium text-center">Legajo</th>
+                    <th class="border border-gray-300 px-4 py-2 font-medium text-center">Nombre Cliente</th>
+                    <th class="border border-gray-300 px-4 py-2 font-medium text-center">Vianda</th>
+                    <th class="border border-gray-300 px-4 py-2 font-medium text-center">Precio</th>
+                </template>
+                <template #body="{ item }">
+                    <td class="border border-gray-300 px-4 py-2 text-gray-600">{{ item.usuario.id }}</td>
+                    <td class="border border-gray-300 px-4 py-2 text-gray-600">{{ item.usuario.nombre }}</td>
+                    <td class="border border-gray-300 px-4 py-2 text-gray-600">{{ item.vianda.nombre }}</td>
+                    <td class="border border-gray-300 px-4 py-2 text-gray-600">{{ item.vianda.precio }}</td>
+                </template>
+            </ViandaAppTable>
         </div>
         <div>
             <VolverBtn />
