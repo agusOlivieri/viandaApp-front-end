@@ -1,9 +1,6 @@
 <script setup>
-import axios from "axios";
-import { ref, watch, onMounted } from "vue";
+import { ref} from "vue";
 import NuevoBtn from '@/components/NuevoBtn.vue';
-import DeleteBtn from '@/components/DeleteBtn.vue';
-
 
 const props = defineProps({
     headers: {
@@ -17,36 +14,10 @@ const props = defineProps({
     acciones: {
         type: Boolean,
     },
-    editVianda: {
-        type: Function,
-    }
 })
 
 const loading = ref(false);
 const error = ref(null);
-
-const selectedItem = ref(null);
-const modalOpen = ref(false);
-
-
-
-const deleteVianda = async (id) => {
-    try {
-        const endpoint = `http://localhost:8080/api/viandas/${id}`;
-        const response = await axios.delete(endpoint);
-        
-        if (response.status === 200) {
-            fetchData();
-        } else {
-            console.error("Error al eliminar la vianda");
-        }
-    } catch (error) {
-        console.error("Error al intentar eliminar la vianda:", error.message)
-    }
-} 
-
-
-// watch(() => fetchData, { deep: true })
 
 </script>
 
@@ -62,11 +33,8 @@ const deleteVianda = async (id) => {
             <tbody>
                 <tr v-for="(item, index) in items" :key="index" class="hover:bg-gray-50">
                     <slot name="body" :item="item"></slot>
-
                     <slot name="actions" :item="item"></slot>
-
                 </tr>
-
             </tbody>
         </table>
 

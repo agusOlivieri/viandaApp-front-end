@@ -3,9 +3,10 @@ import ViandaAppTable from '@/components/ViandaAppTable.vue';
 import VolverBtn from '@/components/VolverBtn.vue';
 import EditViandaModal from '@/components/EditViandaModal.vue';
 import { useUsuarioStore } from "@/stores/usuario";
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import axios from 'axios';
 import EditBtn from '@/components/EditBtn.vue';
+import DeleteBtn from '@/components/DeleteBtn.vue';
 
 const usuarioStore = useUsuarioStore();
 
@@ -51,11 +52,28 @@ const fetchData = async () => {
 };
 
 onMounted(fetchData);
+watch(() => fetchData, { deep: true })
 
 const editVianda = (item) => {
     selectedItem.value = item;
     modalOpen.value = true;
 };
+
+const deleteVianda = async (id) => {
+    console.log(id)
+    try {
+        const endpoint = `http://localhost:8080/api/viandas/${id}`;
+        const response = await axios.delete(endpoint);
+        
+        if (response.status === 200) {
+            fetchData();
+        } else {
+            console.error("Error al eliminar la vianda");
+        }
+    } catch (error) {
+        console.error("Error al intentar eliminar la vianda:", error.message)
+    }
+} 
 </script>
 
 <template>
@@ -75,7 +93,7 @@ const editVianda = (item) => {
                 <template #actions="{ item }">
                     <td class="border border-gray-300 px-4 py-2 flex gap-2">
                         <EditBtn @edit="editVianda(item)" />
-                        <!-- <DeleteBtn @delete="deleteVianda(item.id)"/> -->
+                        <DeleteBtn @delete="deleteVianda(item.id)"/>
                     </td>
                 </template>    
             </ViandaAppTable>
