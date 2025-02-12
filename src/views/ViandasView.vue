@@ -7,6 +7,7 @@ import { ref, onMounted, watch } from 'vue';
 import axios from 'axios';
 import EditBtn from '@/components/EditBtn.vue';
 import DeleteBtn from '@/components/DeleteBtn.vue';
+import NuevoBtn from '@/components/NuevoBtn.vue';
 
 const usuarioStore = useUsuarioStore();
 
@@ -98,6 +99,11 @@ const deleteVianda = async (id) => {
                 </template>    
             </ViandaAppTable>
         </div>
+
+        <div class="w-32 mt-2">
+            <NuevoBtn link="/admin/viandas/new" text="Nuevo"/>
+        </div>
+
         <div>
             <VolverBtn />
         </div>
