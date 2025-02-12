@@ -10,7 +10,8 @@ const vianda = ref({
     nombre: "",
     descripcion: "",
     precio: 0,
-    distribuidora: usuarioStore.getDistribuidora(),
+    // distribuidora: usuarioStore.getDistribuidora(),
+    distribuidora: 'Placeres',
 });
 
 const loading = ref(false);

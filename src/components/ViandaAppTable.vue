@@ -2,7 +2,6 @@
 import axios from "axios";
 import { ref, watch, onMounted } from "vue";
 import NuevoBtn from '@/components/NuevoBtn.vue';
-import EditBtn from '@/components/EditBtn.vue';
 import DeleteBtn from '@/components/DeleteBtn.vue';
 
 
@@ -29,9 +28,7 @@ const error = ref(null);
 const selectedItem = ref(null);
 const modalOpen = ref(false);
 
-const editVianda = (item) => {
-    selectedItem.value = item;
-};
+
 
 const deleteVianda = async (id) => {
     try {
@@ -65,18 +62,13 @@ const deleteVianda = async (id) => {
             <tbody>
                 <tr v-for="(item, index) in items" :key="index" class="hover:bg-gray-50">
                     <slot name="body" :item="item"></slot>
-                    <td v-if="acciones" class="border border-gray-300 px-4 py-2 flex gap-2">
-                        <EditBtn @edit="editVianda(item)" />
-                        <!-- <DeleteBtn @delete="deleteVianda(item.id)"/> -->
-                    </td>
+
+                    <slot name="actions" :item="item"></slot>
+
                 </tr>
 
             </tbody>
         </table>
-
-        <slot name="editModal" :selectedItem="selectedItem"></slot>
-
-
 
         <div class="w-32 mt-2">
             <NuevoBtn link="/admin/viandas/new" text="Nuevo"/>

@@ -3,6 +3,7 @@ import { defineEmits, ref, watch } from 'vue';
 
 const props = defineProps({
     vianda: Object,
+    isOpen: Boolean,
 });
 
 const emit = defineEmits(["close", "update"]);
@@ -10,8 +11,8 @@ const emit = defineEmits(["close", "update"]);
 const editedVianda = ref({ ...props.vianda });
 
 watch(() => props.vianda, (newVianda) => {
-    editedVianda.value = newVianda ? { ...newVianda } : null;
-}, { inmediate: true });
+    editedVianda.value = { ...newVianda };
+}, { deep: true });
 
 const closeModal = () => {
     emit("close");
@@ -24,7 +25,7 @@ const saveChanges = () => {
 </script>
 
 <template>
-    <div class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
+    <div v-if="isOpen" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
         <div class="bg-white p-6 rounded-lg shadow-lg w-96">
             <h2 class="text-lg font-semibold mb-4">Editar Vianda</h2>
 

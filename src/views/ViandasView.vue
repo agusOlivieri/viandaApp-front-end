@@ -5,10 +5,12 @@ import EditViandaModal from '@/components/EditViandaModal.vue';
 import { useUsuarioStore } from "@/stores/usuario";
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
+import EditBtn from '@/components/EditBtn.vue';
 
 const usuarioStore = useUsuarioStore();
 
 const selectedItem = ref(null);
+const modalOpen = ref(false);
 
 const updateVianda = async (updatedVianda) => {
     try {
@@ -21,7 +23,7 @@ const updateVianda = async (updatedVianda) => {
         );
         
         if (response.status === 200) {
-            closeModal();
+            modalOpen.value = false;
             fetchData();
         } else {
             console.error("Error al actualizar la vianda");
@@ -50,9 +52,10 @@ const fetchData = async () => {
 
 onMounted(fetchData);
 
-const closeModal = () => {
-    selectedItem.value = null
-}
+const editVianda = (item) => {
+    selectedItem.value = item;
+    modalOpen.value = true;
+};
 </script>
 
 <template>
@@ -69,13 +72,23 @@ const closeModal = () => {
                     <td class="border border-gray-300 px-4 py-2 text-gray-600">{{ item.descripcion }}</td>
                     <td class="border border-gray-300 px-4 py-2 text-gray-600">{{ item.precio }}</td>
                 </template>
-                <template #editModal="{ selectedItem }">
-                    <EditViandaModal v-if="selectedItem" :vianda="selectedItem" @close="closeModal" @update="updateVianda" />
-                </template>
-            </ViandaAppTable> 
+                <template #actions="{ item }">
+                    <td class="border border-gray-300 px-4 py-2 flex gap-2">
+                        <EditBtn @edit="editVianda(item)" />
+                        <!-- <DeleteBtn @delete="deleteVianda(item.id)"/> -->
+                    </td>
+                </template>    
+            </ViandaAppTable>
         </div>
         <div>
             <VolverBtn />
         </div>
+
+        <EditViandaModal 
+            :isOpen="modalOpen"
+            :vianda="selectedItem"
+            @close="modalOpen = false"
+            @update="updateVianda"
+        />
     </section>
 </template>
