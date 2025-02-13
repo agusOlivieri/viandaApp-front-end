@@ -2,9 +2,11 @@ import axios from "axios";
 
 export const newPedido = async (requestBody) => {
     try {
-        const token = localStorage.getItem("access_token")
-        console.log("token: ", token)
-        const response = await axios.post("http://localhost:8080/api/pedidos/new", requestBody, { headers: { Authorization: `Bearer ${token}` } });
+        // const token = localStorage.getItem("access_token")
+        // console.log("token: ", token)
+        console.log(requestBody)
+        const response = await axios.post("http://localhost:8080/api/pedidos/new", requestBody)
+        // { headers: { Authorization: `Bearer ${token}` } });
 
         console.log(response.data)
         const pedido = response.data.pedido;

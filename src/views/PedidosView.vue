@@ -3,7 +3,7 @@ import ViandaAppTable from '@/components/ViandaAppTable.vue';
 import VolverBtn from '@/components/VolverBtn.vue';
 import { useUsuarioStore } from "@/stores/usuario";
 import axios from 'axios';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 
 const usuarioStore = useUsuarioStore();
 
@@ -24,7 +24,29 @@ const fetchData = async () => {
     };
 };
 
-onMounted(fetchData);
+let eventSource;
+
+onMounted(() => {
+    fetchData();
+
+    eventSource = new EventSource("http://localhost:8080/api/pedidos/stream");
+
+    eventSource.onmessage = (event) => {
+        const nuevoPedido = JSON.parse(event.data);
+        data.value.push(nuevoPedido);
+    };
+
+    eventSource.onerror = () => {
+        console.error("Error en SSE, cerrando conexión");
+        eventSource.close();
+    };
+});
+
+onUnmounted(() => {
+    if (eventSource) {
+        eventSource.close();
+    }
+})
 </script>
 
 <template>

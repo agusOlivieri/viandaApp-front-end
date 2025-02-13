@@ -28,16 +28,17 @@ const seleccionarVianda = () => {
 const confirmarSeleccion = () => {
     const usuarioStore = useUsuarioStore();
 
-    pedido.usuarioId = usuarioStore.usuarioId;
-    pedido.fechaHora = getFormattedDateTime();
-    pedido.viandaId = props.vianda.id;
+    // pedido.value.usuarioId = usuarioStore.usuarioId;
+    pedido.value.usuarioId = 5;
+    pedido.value.fechaHora = getFormattedDateTime();
+    pedido.value.viandaId = props.vianda.id;
 
-    console.log("requestBody: ", pedido)
+    // console.log("requestBody: ", pedido.value)
 
-    const nuevoPedido = newPedido(pedido);
+    const nuevoPedido = newPedido(pedido.value);
 
     if (nuevoPedido) {
-        alert(`Ha seleccionado: ${viandaSeleccionada.value.title}`)
+        alert(`Ha seleccionado: ${props.vianda.nombre}`)
         mostrarConfirmacion.value = false
         viandaSeleccionada.value = null
     }
