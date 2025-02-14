@@ -1,6 +1,7 @@
 <script setup>
 import ViandaAppTable from '@/components/ViandaAppTable.vue';
 import VolverBtn from '@/components/VolverBtn.vue';
+import RemitoBtn from '@/components/RemitoBtn.vue';
 import { useUsuarioStore } from "@/stores/usuario";
 import axios from 'axios';
 import { ref, onMounted, onUnmounted } from 'vue';
@@ -23,6 +24,23 @@ const fetchData = async () => {
         console.error("Error al intentar pedir las viandas: ", err)
     };
 };
+
+const generarRemito = async () => {
+    try {
+        const response = await axios.get("http://localhost:8080/api/pedidos/remitos/csv", {
+            responseType: "blob",
+        });
+
+        const url = window.URL.createObjectURL(new Blob([response.data], { type: "text/csv" }));
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", "Remito_Pedidos.csv")
+        document.body.appendChild(link);
+        link.click();
+    } catch (error) {
+        console.error("Error al generar el remito: ", error);
+    }
+}
 
 let eventSource;
 
@@ -69,6 +87,7 @@ onUnmounted(() => {
         </div>
         <div>
             <VolverBtn />
+            <RemitoBtn @remito="generarRemito"/>
         </div>
     </section>
 </template>
