@@ -29,6 +29,7 @@ const generarRemito = async () => {
     try {
         const response = await axios.get("http://localhost:8080/api/pedidos/remitos/csv", {
             responseType: "blob",
+            params: { distribuidora: distribuidora }
         });
 
         const url = window.URL.createObjectURL(new Blob([response.data], { type: "text/csv" }));
