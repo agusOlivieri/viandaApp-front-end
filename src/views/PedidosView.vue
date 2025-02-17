@@ -5,7 +5,7 @@ import RemitoBtn from '@/components/RemitoBtn.vue';
 import { useUsuarioStore } from "@/stores/usuario";
 import axios from 'axios';
 import { ref, onMounted, onUnmounted } from 'vue';
-import { handleDescuentos } from '@/services/descuentoService';
+import { descargarReporte } from '@/services/pedidoService';
 
 const usuarioStore = useUsuarioStore();
 

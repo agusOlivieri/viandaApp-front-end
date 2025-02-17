@@ -40,7 +40,6 @@ const confirmarSeleccion = () => {
     if (nuevoPedido) {
         alert(`Ha seleccionado: ${props.vianda.nombre}`)
         mostrarConfirmacion.value = false
-        viandaSeleccionada.value = null
     }
 
 };

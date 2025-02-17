@@ -46,3 +46,21 @@ export const getFormattedDateTime = () => {
 
     return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}.${microseconds}`;
 }
+
+export const descargarReporte = async () => {
+    try {
+        const response = await axios.get("http://localhost:8080/api/pedidos/reporte/mensual", {
+            params: { year: 2025, month: 2 },
+            responseType: "blob",
+        });
+
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", "reporte_pedidos.xlsx");
+        document.body.appendChild(link);
+        link.click();
+    } catch (error) {
+        console.error("Error al descargar el reporte:", error);
+    }
+};
