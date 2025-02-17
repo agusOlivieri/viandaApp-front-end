@@ -2,6 +2,7 @@
 import ViandaAppTable from '@/components/ViandaAppTable.vue';
 import VolverBtn from '@/components/VolverBtn.vue';
 import RemitoBtn from '@/components/RemitoBtn.vue';
+import ReporteBtn from '@/components/ReporteBtn.vue';
 import { useUsuarioStore } from "@/stores/usuario";
 import axios from 'axios';
 import { ref, onMounted, onUnmounted } from 'vue';
@@ -90,6 +91,7 @@ onUnmounted(() => {
         <div>
             <VolverBtn />
             <RemitoBtn @remito="generarRemito"/>
+            <ReporteBtn @reporte="descargarReporte"/>
         </div>
     </section>
 </template>
