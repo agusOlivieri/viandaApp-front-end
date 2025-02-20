@@ -30,7 +30,7 @@ const error = ref(null);
                     <thead class="border-b-2 sticky top-0 bg-white">
                         <tr>
                             <slot name="header"></slot>
-                            <th v-if="acciones" class="px-1 py-2 text-left font-medium text-gray-700">Acciones</th>
+                            <th v-if="acciones" class="py-2 text-center font-medium">Acciones</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y">

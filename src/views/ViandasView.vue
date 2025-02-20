@@ -79,20 +79,21 @@ const deleteVianda = async (id) => {
 
 <template>
     <section id="viandas">
-        <div class="w-full ">
+        <VolverBtn />
+        <div class="w-full px-6">
             <ViandaAppTable :items="data" :acciones="true">
                 <template #header>
-                    <th class="border border-gray-300 px-4 py-2 font-medium text-center">Nombre</th>
-                    <th class="border border-gray-300 px-4 py-2 font-medium text-center">Descripción</th>
-                    <th class="border border-gray-300 px-4 py-2 font-medium text-center">Precio</th>
+                    <th class="py-2 font-medium text-center">Nombre</th>
+                    <th class="py-2 font-medium text-center">Descripción</th>
+                    <th class="py-2 font-medium text-center">Precio</th>
                 </template>
                 <template #body="{ item }">
-                    <td class="border border-gray-300 px-4 py-2 text-gray-600">{{ item.nombre }}</td>
-                    <td class="border border-gray-300 px-4 py-2 text-gray-600">{{ item.descripcion }}</td>
-                    <td class="border border-gray-300 px-4 py-2 text-gray-600">{{ item.precio }}</td>
+                    <td class="py-2">{{ item.nombre }}</td>
+                    <td class="py-2">{{ item.descripcion }}</td>
+                    <td class="py-2">{{ item.precio }}</td>
                 </template>
                 <template #actions="{ item }">
-                    <td class="border border-gray-300 px-4 py-2 flex gap-2">
+                    <td class="py-2 flex gap-2 justify-center">
                         <EditBtn @edit="editVianda(item)" />
                         <DeleteBtn @delete="deleteVianda(item.id)"/>
                     </td>
@@ -100,14 +101,8 @@ const deleteVianda = async (id) => {
             </ViandaAppTable>
         </div>
 
-        <div class="w-32 mt-2">
-            <NuevoBtn link="/admin/viandas/new" text="Nuevo"/>
-        </div>
-
-        <div>
-            <VolverBtn />
-        </div>
-
+        <NuevoBtn link="/admin/viandas/new" text="Nuevo"/>
+        
         <EditViandaModal 
             :isOpen="modalOpen"
             :vianda="selectedItem"
