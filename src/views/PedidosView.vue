@@ -72,24 +72,25 @@ onUnmounted(() => {
 
 <template>
     <section id="viandas">
-        <div class="w-full ">
+        <VolverBtn />
+        <div class="w-full px-6">
             <ViandaAppTable :items="data" :acciones="false">
                 <template #header>
-                    <th class="border border-gray-300 px-4 py-2 font-medium text-center">Legajo</th>
-                    <th class="border border-gray-300 px-4 py-2 font-medium text-center">Nombre Cliente</th>
-                    <th class="border border-gray-300 px-4 py-2 font-medium text-center">Vianda</th>
-                    <th class="border border-gray-300 px-4 py-2 font-medium text-center">Precio</th>
+                    <th class="py-2 font-medium text-center">Legajo</th>
+                    <th class="py-2 font-medium text-center">Nombre Cliente</th>
+                    <th class="py-2 font-medium text-center">Vianda</th>
+                    <th class="py-2 font-medium text-center">Precio</th>
                 </template>
                 <template #body="{ item }">
-                    <td class="border border-gray-300 px-4 py-2 text-gray-600">{{ item.usuario.id }}</td>
-                    <td class="border border-gray-300 px-4 py-2 text-gray-600">{{ item.usuario.nombre }}</td>
-                    <td class="border border-gray-300 px-4 py-2 text-gray-600">{{ item.vianda.nombre }}</td>
-                    <td class="border border-gray-300 px-4 py-2 text-gray-600">{{ item.vianda.precio }}</td>
+                    <td class="py-2 text-gray-600">{{ item.usuario.id }}</td>
+                    <td class="py-2 text-gray-600">{{ item.usuario.nombre }}</td>
+                    <td class="py-2 text-gray-600">{{ item.vianda.nombre }}</td>
+                    <td class="py-2 text-gray-600">{{ item.vianda.precio }}</td>
                 </template>
             </ViandaAppTable>
         </div>
         <div>
-            <VolverBtn />
+
             <RemitoBtn @remito="generarRemito"/>
             <ReporteBtn @reporte="descargarReporte"/>
         </div>
