@@ -5,7 +5,7 @@ export const newPedido = async (requestBody) => {
         // const token = localStorage.getItem("access_token")
         // console.log("token: ", token)
         console.log(requestBody)
-        const response = await axios.post("http://localhost:8080/api/pedidos/new", requestBody)
+        const response = await axios.post("https://viandaapp-production.up.railway.app/api/pedidos/new", requestBody)
         // { headers: { Authorization: `Bearer ${token}` } });
 
         console.log(response.data)
@@ -49,7 +49,7 @@ export const getFormattedDateTime = () => {
 
 export const descargarReporte = async () => {
     try {
-        const response = await axios.get("http://localhost:8080/api/pedidos/reporte/mensual", {
+        const response = await axios.get("https://viandaapp-production.up.railway.app/api/pedidos/reporte/mensual", {
             params: { year: 2025, month: 2 },
             responseType: "blob",
         });

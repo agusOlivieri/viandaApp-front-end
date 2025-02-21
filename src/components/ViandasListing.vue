@@ -21,7 +21,7 @@ const fetchViandas = async () => {
     error.value = null;
     
     try {
-        const endpoint = `http://localhost:8080/api/viandas/${props.distribuidora}`;
+        const endpoint = `https://viandaapp-production.up.railway.app/api/viandas/${props.distribuidora}`;
         const response = await axios.get(endpoint);
         viandas.value = response.data;
     } catch (error) {

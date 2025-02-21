@@ -26,7 +26,7 @@ const crearVianda = async () => {
     try {
         // const token = localStorage.getItem("access_token")
         const response = await axios.post(
-            "http://localhost:8080/api/viandas/new",
+            "https://viandaapp-production.up.railway.app/api/viandas/new",
              vianda.value, 
             //  { headers: { Authorization: `Bearer ${token}` } }
         );

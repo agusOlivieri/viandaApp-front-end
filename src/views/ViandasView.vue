@@ -17,7 +17,7 @@ const modalOpen = ref(false);
 const updateVianda = async (updatedVianda) => {
     try {
         // const token = localStorage.getItem("access_token")
-        const endpoint = "http://localhost:8080/api/viandas/update";
+        const endpoint = "https://viandaapp-production.up.railway.app/api/viandas/update";
         const response = await axios.put(
             endpoint, 
             updatedVianda
@@ -43,7 +43,7 @@ const data = ref([]);
 const fetchData = async () => {
     try {
         // const token = localStorage.getItem("access_token")
-        const response = await axios.get(`http://localhost:8080/api/viandas/${distribuidora}`, {
+        const response = await axios.get(`https://viandaapp-production.up.railway.app/api/viandas/${distribuidora}`, {
             // headers: { Authorization: `Bearer ${token}` } 
         });
         data.value = response.data;
@@ -63,7 +63,7 @@ const editVianda = (item) => {
 const deleteVianda = async (id) => {
     console.log(id)
     try {
-        const endpoint = `http://localhost:8080/api/viandas/${id}`;
+        const endpoint = `https//viandaapp-production.up.railway.app/api/viandas/${id}`;
         const response = await axios.delete(endpoint);
         
         if (response.status === 200) {

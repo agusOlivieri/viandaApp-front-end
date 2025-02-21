@@ -17,7 +17,7 @@ const data = ref([]);
 const fetchData = async () => {
     try {
         // const token = localStorage.getItem("access_token")
-        const response = await axios.get(`http://localhost:8080/api/pedidos/${distribuidora}`, {
+        const response = await axios.get(`https://viandaapp-production.up.railway.app/api/pedidos/${distribuidora}`, {
             // headers: { Authorization: `Bearer ${token}` } 
         });
         data.value = response.data;
@@ -29,7 +29,7 @@ const fetchData = async () => {
 
 const generarRemito = async () => {
     try {
-        const response = await axios.get("http://localhost:8080/api/pedidos/remitos/csv", {
+        const response = await axios.get("https://viandaapp-production.up.railway.app/api/pedidos/remitos/csv", {
             responseType: "blob",
             params: { distribuidora: distribuidora }
         });
@@ -50,7 +50,7 @@ let eventSource;
 onMounted(() => {
     fetchData();
 
-    eventSource = new EventSource("http://localhost:8080/api/pedidos/stream");
+    eventSource = new EventSource("https://viandaapp-production.up.railway.app/api/pedidos/stream");
 
     eventSource.onmessage = (event) => {
         const nuevoPedido = JSON.parse(event.data);

@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const handleDescuentos = async () => {
     try {
-        const response = await axios.get("http://localhost:8080/api/pedidos");
+        const response = await axios.get("https://viandaapp-production.up.railway.app/api/pedidos");
         const pedidos = response.data;
 
         // console.log("pedidos: ", pedidos)

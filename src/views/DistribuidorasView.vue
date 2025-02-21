@@ -7,7 +7,7 @@ const distribuidoras = ref([]);
 
 const fetchDistribuidoras = async () => {
     try {
-        const endpoint = "http://localhost:8080/api/viandas/distribuidoras";
+        const endpoint = "https://viandaapp-production.up.railway.app/api/viandas/distribuidoras";
         const response = await axios.get(endpoint);
         distribuidoras.value = response.data;
 

@@ -15,7 +15,7 @@ const login = async () => {
   const usuarioStore = useUsuarioStore();
 
   try {
-    const endpoint = "http://localhost:8080/api/auth/login";
+    const endpoint = "https://viandaapp-production.up.railway.app/api/auth/login";
     const access_token = await getTokens(endpoint, credentials.value);
     
     usuarioStore.setToken(access_token);
