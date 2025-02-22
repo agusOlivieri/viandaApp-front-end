@@ -28,8 +28,8 @@ const seleccionarVianda = () => {
 const confirmarSeleccion = () => {
     const usuarioStore = useUsuarioStore();
 
-    // pedido.value.usuarioId = usuarioStore.usuarioId;
-    pedido.value.usuarioId = 5;
+    pedido.value.usuarioId = usuarioStore.usuarioId;
+    // pedido.value.usuarioId = 5;
     pedido.value.fechaHora = getFormattedDateTime();
     pedido.value.viandaId = props.vianda.id;
 
