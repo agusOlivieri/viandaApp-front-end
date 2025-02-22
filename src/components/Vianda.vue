@@ -38,7 +38,7 @@ const confirmarSeleccion = () => {
     const nuevoPedido = newPedido(pedido.value);
 
     if (nuevoPedido) {
-        alert(`Ha seleccionado: ${props.vianda.nombre}`)
+        alert(`Ha seleccionado: ${props.vianda.nombre}` + "\n" + "Por favor pase a retirar su pedido")
         mostrarConfirmacion.value = false
     }
 
