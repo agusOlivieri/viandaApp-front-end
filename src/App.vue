@@ -1,5 +1,9 @@
 <script setup>
 import { RouterView } from 'vue-router';
+import { useUsuarioStore } from './stores/usuario';
+
+const usuarioStore = useUsuarioStore();
+usuarioStore.setDatosGuardados();
 </script>
 
 <template>

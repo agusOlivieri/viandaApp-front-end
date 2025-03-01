@@ -11,13 +11,14 @@ import { API_URL } from '@/config/api';
 
 const usuarioStore = useUsuarioStore();
 
-// const distribuidora = usuarioStore.getDistribuidora();
-const distribuidora = 'Placeres';
+const distribuidora = usuarioStore.getDistribuidora();
+// const distribuidora = 'Placeres';
 const data = ref([]);
 
 const fetchData = async () => {
     try {
         // const token = localStorage.getItem("access_token")
+        console.log(distribuidora)
         const response = await axios.get(`${API_URL}/api/pedidos/${distribuidora}`, {
             // headers: { Authorization: `Bearer ${token}` } 
         });

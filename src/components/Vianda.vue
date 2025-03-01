@@ -33,7 +33,7 @@ const confirmarSeleccion = () => {
     pedido.value.fechaHora = getFormattedDateTime();
     pedido.value.viandaId = props.vianda.id;
 
-    // console.log("requestBody: ", pedido.value)
+    console.log("requestBody: ", pedido.value)
 
     const nuevoPedido = newPedido(pedido.value);
 
