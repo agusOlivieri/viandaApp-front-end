@@ -2,6 +2,7 @@
 import Vianda from '@/components/Vianda.vue'
 import axios from 'axios';
 import { ref, onMounted, watch } from 'vue';
+import { API_URL } from '@/config/api';
 
 const props = defineProps({
     distribuidora: {
@@ -21,7 +22,7 @@ const fetchViandas = async () => {
     error.value = null;
     
     try {
-        const endpoint = `https://viandaapp-production.up.railway.app/api/viandas/${props.distribuidora}`;
+        const endpoint = `${API_URL}/api/viandas/${props.distribuidora}`;
         const response = await axios.get(endpoint);
         viandas.value = response.data;
     } catch (error) {

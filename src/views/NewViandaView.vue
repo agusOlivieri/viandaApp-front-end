@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue';
 import axios from "axios";
 import VolverBtn from '@/components/VolverBtn.vue';
 import { useUsuarioStore } from '@/stores/usuario';
+import { API_URL } from '@/config/api';
 
 const usuarioStore = useUsuarioStore();
 
@@ -10,8 +11,7 @@ const vianda = ref({
     nombre: "",
     descripcion: "",
     precio: 0,
-    // distribuidora: usuarioStore.getDistribuidora(),
-    distribuidora: 'Placeres',
+    distribuidora: usuarioStore.getDistribuidora(),
 });
 
 const loading = ref(false);
@@ -26,7 +26,7 @@ const crearVianda = async () => {
     try {
         // const token = localStorage.getItem("access_token")
         const response = await axios.post(
-            "https://viandaapp-production.up.railway.app/api/viandas/new",
+            `${API_URL}/api/viandas/new`,
              vianda.value, 
             //  { headers: { Authorization: `Bearer ${token}` } }
         );

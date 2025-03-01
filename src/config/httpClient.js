@@ -1,9 +1,10 @@
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { refreshAccessToken } from "@/services/authService";
+import { API_URL } from "./api";
 
 const apiClient = axios.create({
-    baseURL: "http://localhost:8080/api",
+    baseURL: `${API_URL}/api`,
 });
 
 apiClient.interceptors.request.use(async (config) => {

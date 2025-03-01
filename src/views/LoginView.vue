@@ -1,9 +1,9 @@
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { jwtDecode } from "jwt-decode";
 import { getTokens } from "@/services/authService";
 import { useUsuarioStore } from "@/stores/usuario";
+import { API_URL } from "@/config/api";
 
 const router = useRouter();
 const credentials = ref({
@@ -15,7 +15,7 @@ const login = async () => {
   const usuarioStore = useUsuarioStore();
 
   try {
-    const endpoint = "https://viandaapp-production.up.railway.app/api/auth/login";
+    const endpoint = `${API_URL}/api/auth/login`;
     const access_token = await getTokens(endpoint, credentials.value);
     
     usuarioStore.setToken(access_token);

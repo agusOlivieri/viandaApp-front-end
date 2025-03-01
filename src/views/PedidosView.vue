@@ -7,17 +7,18 @@ import { useUsuarioStore } from "@/stores/usuario";
 import axios from 'axios';
 import { ref, onMounted, onUnmounted } from 'vue';
 import { descargarReporte } from '@/services/pedidoService';
+import { API_URL } from '@/config/api';
 
 const usuarioStore = useUsuarioStore();
 
 // const distribuidora = usuarioStore.getDistribuidora();
-const distribuidora = 'placeres';
+const distribuidora = 'Placeres';
 const data = ref([]);
 
 const fetchData = async () => {
     try {
         // const token = localStorage.getItem("access_token")
-        const response = await axios.get(`https://viandaapp-production.up.railway.app/api/pedidos/${distribuidora}`, {
+        const response = await axios.get(`${API_URL}/api/pedidos/${distribuidora}`, {
             // headers: { Authorization: `Bearer ${token}` } 
         });
         data.value = response.data;
@@ -29,7 +30,7 @@ const fetchData = async () => {
 
 const generarRemito = async () => {
     try {
-        const response = await axios.get("https://viandaapp-production.up.railway.app/api/pedidos/remitos/csv", {
+        const response = await axios.get(`${API_URL}/api/pedidos/remitos/csv`, {
             responseType: "blob",
             params: { distribuidora: distribuidora }
         });
@@ -50,7 +51,7 @@ let eventSource;
 onMounted(() => {
     fetchData();
 
-    eventSource = new EventSource("https://viandaapp-production.up.railway.app/api/pedidos/stream");
+    eventSource = new EventSource(`${API_URL}/api/pedidos/stream`);
 
     eventSource.onmessage = (event) => {
         const nuevoPedido = JSON.parse(event.data);

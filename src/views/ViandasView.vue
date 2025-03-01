@@ -8,6 +8,7 @@ import axios from 'axios';
 import EditBtn from '@/components/EditBtn.vue';
 import DeleteBtn from '@/components/DeleteBtn.vue';
 import NuevoBtn from '@/components/NuevoBtn.vue';
+import { API_URL } from '@/config/api';
 
 const usuarioStore = useUsuarioStore();
 
@@ -17,7 +18,7 @@ const modalOpen = ref(false);
 const updateVianda = async (updatedVianda) => {
     try {
         // const token = localStorage.getItem("access_token")
-        const endpoint = "https://viandaapp-production.up.railway.app/api/viandas/update";
+        const endpoint = `${API_URL}/api/viandas/update`;
         const response = await axios.put(
             endpoint, 
             updatedVianda
@@ -36,14 +37,13 @@ const updateVianda = async (updatedVianda) => {
     };
 };
 
-// const distribuidora = usuarioStore.getDistribuidora();
-const distribuidora = 'placeres';
+const distribuidora = usuarioStore.getDistribuidora();
 const data = ref([]);
 
 const fetchData = async () => {
     try {
         // const token = localStorage.getItem("access_token")
-        const response = await axios.get(`https://viandaapp-production.up.railway.app/api/viandas/${distribuidora}`, {
+        const response = await axios.get(`${API_URL}/api/viandas/${distribuidora}`, {
             // headers: { Authorization: `Bearer ${token}` } 
         });
         data.value = response.data;
@@ -61,9 +61,8 @@ const editVianda = (item) => {
 };
 
 const deleteVianda = async (id) => {
-    console.log(id)
     try {
-        const endpoint = `https//viandaapp-production.up.railway.app/api/viandas/${id}`;
+        const endpoint = `${API_URL}/api/viandas/${id}`;
         const response = await axios.delete(endpoint);
         
         if (response.status === 200) {

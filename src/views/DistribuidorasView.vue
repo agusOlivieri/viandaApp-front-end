@@ -2,12 +2,13 @@
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
 import { RouterLink } from 'vue-router';
+import { API_URL } from '@/config/api';
 
 const distribuidoras = ref([]);
 
 const fetchDistribuidoras = async () => {
     try {
-        const endpoint = "https://viandaapp-production.up.railway.app/api/viandas/distribuidoras";
+        const endpoint = `${API_URL}/api/viandas/distribuidoras`;
         const response = await axios.get(endpoint);
         distribuidoras.value = response.data;
 

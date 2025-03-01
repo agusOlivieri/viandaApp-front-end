@@ -4,6 +4,7 @@ import { useRouter } from "vue-router";
 import { getTokens } from "@/services/authService";
 import { useUsuarioStore } from "@/stores/usuario";
 import axios from "axios";
+import { API_URL } from "@/config/api";
 
 const router = useRouter();
 
@@ -36,10 +37,10 @@ const register = async () => {
     };
 
     if (form.value.rol === 'CLIENTE') {
-      endpoint = "https://viandaapp-production.up.railway.app/api/auth/register/cliente"
+      endpoint = `${API_URL}/api/auth/register/cliente`
       requestData.area = user.value.area;
     } else if (form.value.rol === 'ADMINISTRADOR') {
-      endpoint = "https://viandaapp-production.up.railway.app/api/auth/register/admin"
+      endpoint = `${API_URL}/api/auth/register/admin`
       requestData.distribuidora = user.value.distribuidora;
     }
 
@@ -61,7 +62,7 @@ const register = async () => {
 
 const fetchAreas = async () => {
     try {
-      const endpoint = "https://viandaapp-production.up.railway.app/api/area";
+      const endpoint = `${API_URL}/api/area`;
         const response = await axios.get(endpoint);
         areas.value = response.data
     } catch (error) {
@@ -71,7 +72,7 @@ const fetchAreas = async () => {
 
 const fetchDistribuidoras = async () => {
     try {
-      const endpoint = "https://viandaapp-production.up.railway.app/api/viandas/distribuidoras";
+      const endpoint = `${API_URL}/api/viandas/distribuidoras`;
         const response = await axios.get(endpoint);
         distribuidoras.value = response.data
     } catch (error) {

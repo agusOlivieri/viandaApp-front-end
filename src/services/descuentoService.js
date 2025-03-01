@@ -1,11 +1,10 @@
 import axios from "axios";
+import { API_URL } from "@/config/api";
 
 export const handleDescuentos = async () => {
     try {
-        const response = await axios.get("https://viandaapp-production.up.railway.app/api/pedidos");
+        const response = await axios.get(`${API_URL}/api/pedidos`);
         const pedidos = response.data;
-
-        // console.log("pedidos: ", pedidos)
 
         const pedidosPorUsuario = new Map();
 
@@ -19,8 +18,6 @@ export const handleDescuentos = async () => {
             }
             pedidosPorUsuario.get(key).push(pedido);
         });
-
-        // console.log("pedidos por usuario: ", pedidosPorUsuario)
 
         const tabla = pedidos.map(pedido => {
             const userId = pedido.usuario.id;
