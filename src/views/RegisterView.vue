@@ -37,11 +37,13 @@ const register = async () => {
     };
 
     if (form.value.rol === 'CLIENTE') {
-      endpoint = `${API_URL}/api/auth/register/cliente`
+      endpoint = `${API_URL}/api/auth/register/cliente`;
       requestData.area = user.value.area;
-    } else if (form.value.rol === 'ADMINISTRADOR') {
-      endpoint = `${API_URL}/api/auth/register/admin`
+    } else if (form.value.rol === 'ADMINISTRADOR_DISTRIBUIDORA') {
+      endpoint = `${API_URL}/api/auth/register/admin/distribuidora`;
       requestData.distribuidora = user.value.distribuidora;
+    } else if (form.value.rol === 'ADMINISTRADOR_AGUAS') {
+      endpoint = `${API_URL}/api/auth/register/admin/aguas`
     }
 
     const access_token = await getTokens(endpoint, requestData)
@@ -52,7 +54,9 @@ const register = async () => {
     if (usuarioStore.area) {
       router.push("/client/home");
     } else if (usuarioStore.distribuidora) {
-      router.push("/admin/home");
+      router.push("/admin/distribuidora/home");
+    } else if (usuarioStore.esAdminAguas) {
+      router.push("/admin/aguas/home");
     }
   } catch (error) {
     console.error("Error en el registro:", error);
@@ -102,7 +106,8 @@ onMounted(fetchDistribuidoras);
               >
                 <option value="" disabled>Seleccione su rol</option>
                 <option value="CLIENTE">Cliente</option>
-                <option value="ADMINISTRADOR">Administrador</option>
+                <option value="ADMINISTRADOR_DISTRIBUIDORA">Administrador de Distribuidora</option>
+                <option value="ADMINISTRADOR_AGUAS">Administrador de Aguas</option>
               </select>
             </div>
             
@@ -169,7 +174,7 @@ onMounted(fetchDistribuidoras);
             </select>
           </div>
 
-          <div v-if="form.rol === 'ADMINISTRADOR'">
+          <div v-if="form.rol === 'ADMINISTRADOR_DISTRIBUIDORA'">
             <label for="distribuidora" class="block text-sm font-medium text-gray-700">Distribuidora</label>
             <select
               id="distribuidora"

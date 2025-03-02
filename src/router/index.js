@@ -4,12 +4,13 @@ import NotFoundView from '@/views/NotFoundView.vue'
 import OrderView from '@/views/OrderView.vue'
 import RegisterView from '@/views/RegisterView.vue'
 import LoginView from '@/views/LoginView.vue'
-import AdminHomeView from '@/views/AdminHomeView.vue'
+import AdminDistribuidoraHomeView from '@/views/AdminDistribuidoraHomeView.vue'
 import ViandasView from '@/views/ViandasView.vue'
 import { useUsuarioStore } from '@/stores/usuario'
 import NewViandaView from '@/views/NewViandaView.vue'
 import PedidosView from '@/views/PedidosView.vue'
 import DistribuidorasView from '@/views/DistribuidorasView.vue'
+import AdminAguasHomeView from '@/views/AdminAguasHomeView.vue'
 
 const router = createRouter({
   history: createWebHashHistory(),   // <-- para que ande el deploy con vercel 
@@ -42,24 +43,24 @@ const router = createRouter({
       component: ClientHomeView,
     },
     {
-      path: '/admin/home',
-      name: 'admin-home',
-      component: AdminHomeView,
+      path: '/admin/distribuidora/home',
+      name: 'admin-distribuidora-home',
+      component: AdminDistribuidoraHomeView,
     },
     {
-      path: '/admin/viandas',
-      name: 'admin-viandas',
+      path: '/admin/distribuidora/viandas',
+      name: 'admin-distribuidora-viandas',
       component: ViandasView,
       // meta: { requiresAuth: true, roles: ["ROLE_ADMINISTRADOR"] },
     },
     {
-      path: '/admin/viandas/new',
+      path: '/admin/distribuidora/viandas/new',
       name: 'new-vianda',
       component: NewViandaView,
       // meta: { requiresAuth: true, roles: ["ROLE_ADMINISTRADOR"] },
     },
     {
-      path: '/admin/pedidos',
+      path: '/admin/distribuidora/pedidos',
       name: 'pedidos',
       component: PedidosView,
       // meta: { requiresAuth: true, roles: ["ROLE_ADMINISTRADOR"] },
@@ -68,6 +69,11 @@ const router = createRouter({
       path: '/client/ordenar/:distribuidora',
       name: 'ordenar',
       component: OrderView,
+    },
+    {
+      path: '/admin/aguas/home',
+      name: 'admin-aguas-home',
+      component: AdminAguasHomeView,
     }
     
   ],

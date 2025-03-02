@@ -19,13 +19,15 @@ const login = async () => {
     const access_token = await getTokens(endpoint, credentials.value);
     
     usuarioStore.setToken(access_token);
-    
+    console.log(usuarioStore.distribuidora)
+
     alert("Inicio de sesión exitoso");
+
 
     if (usuarioStore.area) {
       router.push("/client/home");
     } else if (usuarioStore.distribuidora) {
-      router.push("/admin/home");
+      router.push("/admin/distribuidora/home");
     }
     
   } catch (error) {

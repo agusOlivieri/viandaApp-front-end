@@ -100,7 +100,7 @@ const deleteVianda = async (id) => {
             </ViandaAppTable>
         </div>
 
-        <NuevoBtn link="/admin/viandas/new" text="Nuevo"/>
+        <NuevoBtn link="/admin/distribuidora/viandas/new" text="Nuevo"/>
         
         <EditViandaModal 
             :isOpen="modalOpen"

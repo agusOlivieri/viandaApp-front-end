@@ -7,6 +7,7 @@ export const useUsuarioStore = defineStore("usuario", {
         usuarioId: null,
         distribuidora: null,
         area: null,
+        esAdminAguas: false,
     }),
     actions: {
         setToken(token) {
@@ -16,11 +17,13 @@ export const useUsuarioStore = defineStore("usuario", {
             this.usuarioId = decoded.userId;
             this.distribuidora = decoded.distribuidora;
             this.area = decoded.area;
+            this.esAdminAguas = decoded.esAdminAguas;
 
             sessionStorage.setItem("token", token);
             sessionStorage.setItem("usuarioId", decoded.userId);
             sessionStorage.setItem("distribuidora", decoded.distribuidora);
             sessionStorage.setItem("area", decoded.area);
+            sessionStorage.setItem("esAdminAguas", decoded.esAdminAguas);
         },
         setDatosGuardados() {
             const token = sessionStorage.getItem("token");
@@ -37,6 +40,7 @@ export const useUsuarioStore = defineStore("usuario", {
                         this.usuarioId = sessionStorage.getItem("usuarioId");
                         this.distribuidora = sessionStorage.getItem("distribuidora");
                         this.area = sessionStorage.getItem("area");
+                        this.esAdminAguas = sessionStorage.getItem("esAdminAguas");
                     }
                 } catch (error) {
                     console.error("Error al decodificar el token", error);
@@ -53,12 +57,14 @@ export const useUsuarioStore = defineStore("usuario", {
             sessionStorage.removeItem("usuarioId");
             sessionStorage.removeItem("distribuidora");
             sessionStorage.removeItem("area");
+            sessionStorage.removeItem("esAdminAguas");
         },
         clearUsuario() {
             this.token = null;
             this.usuarioId = null;
             this.distribuidora = null;
             this.area = null;
+            this.esAdminAguas = false;
             sessionStorage.removeItem('access_token');
         },
         getDistribuidora() {
