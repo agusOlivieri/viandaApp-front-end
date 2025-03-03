@@ -9,6 +9,13 @@ import { ref, onMounted, onUnmounted } from 'vue';
 import { descargarReporte } from '@/services/pedidoService';
 import { API_URL } from '@/config/api';
 
+const props = defineProps({
+    endpoint: {
+        type: String,
+        required: true
+    }
+})
+
 const usuarioStore = useUsuarioStore();
 
 const distribuidora = usuarioStore.getDistribuidora();
@@ -19,7 +26,16 @@ const fetchData = async () => {
     try {
         // const token = localStorage.getItem("access_token")
         console.log(distribuidora)
-        const response = await axios.get(`${API_URL}/api/pedidos/${distribuidora}`, {
+
+        let endpoint;
+
+        if (distribuidora) {
+            endpoint = `${API_URL}/api/pedidos/${distribuidora}`
+        } else {
+            endpoint = `${API_URL}/api/pedidos/today`
+        }
+
+        const response = await axios.get(endpoint, {
             // headers: { Authorization: `Bearer ${token}` } 
         });
         data.value = response.data;

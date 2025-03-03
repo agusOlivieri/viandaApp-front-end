@@ -1,6 +1,5 @@
 <script setup>
 import HomeViewBtn from '@/components/HomeViewBtn.vue';
-
 </script>
 
 <template>
