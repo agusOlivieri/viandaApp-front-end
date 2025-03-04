@@ -19,6 +19,7 @@ const props = defineProps({
 const usuarioStore = useUsuarioStore();
 
 const distribuidora = usuarioStore.getDistribuidora();
+
 // const distribuidora = 'Placeres';
 const data = ref([]);
 
@@ -96,12 +97,14 @@ onUnmounted(() => {
                 <template #header>
                     <th class="py-2 font-medium text-center">Legajo</th>
                     <th class="py-2 font-medium text-center">Nombre Cliente</th>
+                    <th v-if="!distribuidora">Distribuidora</th>
                     <th class="py-2 font-medium text-center">Vianda</th>
                     <th class="py-2 font-medium text-center">Precio</th>
                 </template>
                 <template #body="{ item }">
                     <td class="py-2 text-gray-600">{{ item.usuario.id }}</td>
                     <td class="py-2 text-gray-600">{{ item.usuario.nombre }}</td>
+                    <td v-if="!distribuidora">{{ item.vianda.distribuidora.nombre }}</td>
                     <td class="py-2 text-gray-600">{{ item.vianda.nombre }}</td>
                     <td class="py-2 text-gray-600">{{ item.vianda.precio }}</td>
                 </template>
