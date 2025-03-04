@@ -1,14 +1,16 @@
 import axios from "axios";
 import { API_URL } from "@/config/api";
 
-export const newPedido = async (requestBody) => {
+export const newPedido = async (requestBody, cantidad) => {
     try {
-        // const token = localStorage.getItem("access_token")
-        const response = await axios.post(`${API_URL}/api/pedidos/new`, requestBody)
-        // { headers: { Authorization: `Bearer ${token}` } });
+        let pedidos = []; 
+        
+        for (let i = 0; i < cantidad; i++) {
+            const response = await axios.post(`${API_URL}/api/pedidos/new`, requestBody);
+            pedidos.push(response.data.pedido);
+        }
 
-        const pedido = response.data.pedido;
-        return pedido;
+        return pedidos;
     } catch (error) {
         if (error.response) {
             // Errores de respuesta del servidor

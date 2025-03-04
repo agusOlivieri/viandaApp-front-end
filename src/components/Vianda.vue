@@ -21,11 +21,11 @@ const pedido = ref({
 })
 
 const seleccionarVianda = () => {
-    mensajeConfirmacion.value = `¿Desea seleccionar la vianda "${props.vianda.nombre}"?`
+    mensajeConfirmacion.value = `¿Cuantas viandas quiere ordenar de "${props.vianda.nombre}"?`
     mostrarConfirmacion.value = true;
 };
 
-const confirmarSeleccion = () => {
+const confirmarSeleccion = (cantidad) => {
     const usuarioStore = useUsuarioStore();
 
     pedido.value.usuarioId = usuarioStore.usuarioId;
@@ -35,7 +35,7 @@ const confirmarSeleccion = () => {
 
     console.log("requestBody: ", pedido.value)
 
-    const nuevoPedido = newPedido(pedido.value);
+    const nuevoPedido = newPedido(pedido.value, cantidad);
 
     if (nuevoPedido) {
         alert(`Ha seleccionado: ${props.vianda.nombre}` + "\n" + "Por favor pase a retirar su pedido")
