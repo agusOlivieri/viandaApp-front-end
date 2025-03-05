@@ -28,6 +28,8 @@ const login = async () => {
       router.push("/client/home");
     } else if (usuarioStore.distribuidora) {
       router.push("/admin/distribuidora/home");
+    } else if (usuarioStore.esAdminAguas) {
+      router.push("/admin/aguas/home");
     }
     
   } catch (error) {
