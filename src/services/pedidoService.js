@@ -47,8 +47,12 @@ export const getFormattedDateTime = () => {
 
 export const descargarReporte = async () => {
     try {
+        const fechaActual = new Date();
+        const year = fechaActual.getFullYear();
+        const month = fechaActual.getMonth() + 1;
+
         const response = await axios.get(`${API_URL}/api/pedidos/reporte/mensual`, {
-            params: { year: 2025, month: 2 },
+            params: { year, month },
             responseType: "blob",
         });
 
