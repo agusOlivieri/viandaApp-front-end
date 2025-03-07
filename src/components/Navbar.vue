@@ -9,8 +9,11 @@ defineProps({
 </script>
 
 <template>
-    <nav class="bg-blue-600 px-6 py-3 flex justify-between items-center shadow-md">
+    <nav class="bg-blue-600 text-white px-8 py-2 flex justify-between items-center shadow-md">
         <h1 class="text-lg font-semibold">{{ title }}</h1>
-        <span class="text-sm font-medium">{{ username }}</span>
+        <div class="flex flex-col justify-center items-center">
+            <span class="text-2xl"><i class="pi pi-user" style="color: white"></i></span>
+            <span class="-mt-1 text-sm font-medium">{{ username }}</span>
+        </div>
     </nav>
 </template>
