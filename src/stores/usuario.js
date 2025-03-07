@@ -5,6 +5,7 @@ export const useUsuarioStore = defineStore("usuario", {
     state: () => ({
         token: null,
         usuarioId: null,
+        nombre: null,
         distribuidora: null,
         area: null,
         esAdminAguas: false,
@@ -15,12 +16,14 @@ export const useUsuarioStore = defineStore("usuario", {
 
             const decoded = jwtDecode(token);
             this.usuarioId = decoded.userId;
+            this.nombre = decoded.name;
             this.distribuidora = decoded.distribuidora;
             this.area = decoded.area;
             this.esAdminAguas = decoded.esAdminAguas;
 
             sessionStorage.setItem("token", token);
             sessionStorage.setItem("usuarioId", decoded.userId);
+            sessionStorage.setItem("username", decoded.name);
             sessionStorage.setItem("distribuidora", decoded.distribuidora);
             sessionStorage.setItem("area", decoded.area);
             sessionStorage.setItem("esAdminAguas", decoded.esAdminAguas);
@@ -51,10 +54,12 @@ export const useUsuarioStore = defineStore("usuario", {
         cerrarSesion() {
             this.token = null;
             this.usuarioId = null;
+            this.nombre = null;
             this.distribuidora = null;
             this.area = null;
             sessionStorage.removeItem("token");
             sessionStorage.removeItem("usuarioId");
+            sessionStorage.removeItem("username");
             sessionStorage.removeItem("distribuidora");
             sessionStorage.removeItem("area");
             sessionStorage.removeItem("esAdminAguas");
@@ -62,6 +67,7 @@ export const useUsuarioStore = defineStore("usuario", {
         clearUsuario() {
             this.token = null;
             this.usuarioId = null;
+            this.nombre = null;
             this.distribuidora = null;
             this.area = null;
             this.esAdminAguas = false;
@@ -69,6 +75,9 @@ export const useUsuarioStore = defineStore("usuario", {
         },
         getDistribuidora() {
             return this.distribuidora;
+        },
+        getNombreUsuario() {
+            return this.nombre;
         }
     },
 })

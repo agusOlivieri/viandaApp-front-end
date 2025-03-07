@@ -11,12 +11,15 @@ const credentials = ref({
   password: "",
 });
 
+const emit = defineEmits(["login"]);
+
 const login = async () => {
   const usuarioStore = useUsuarioStore();
 
   try {
     const endpoint = `${API_URL}/api/auth/login`;
     const access_token = await getTokens(endpoint, credentials.value);
+    let title;
     
     usuarioStore.setToken(access_token);
     console.log(usuarioStore.distribuidora)
@@ -25,12 +28,17 @@ const login = async () => {
 
 
     if (usuarioStore.area) {
+      title = "Ordene su comida"
       router.push("/client/home");
     } else if (usuarioStore.distribuidora) {
+      title = "Vea sus pedidos"
       router.push("/admin/distribuidora/home");
     } else if (usuarioStore.esAdminAguas) {
+      title = "Aguas Riojanas"
       router.push("/admin/aguas/home");
     }
+
+    emit("login", title);
     
   } catch (error) {
     console.error("Error al iniciar sesión:", error);
