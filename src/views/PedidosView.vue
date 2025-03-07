@@ -94,12 +94,22 @@ onUnmounted(() => {
         <VolverBtn />
         <div class="w-full px-6">
             <ViandaAppTable :items="data" :acciones="false">
-                <template #header>
-                    <th class="py-2 font-medium text-center">Legajo</th>
-                    <th class="py-2 font-medium text-center">Nombre Cliente</th>
-                    <th v-if="!distribuidora">Distribuidora</th>
-                    <th class="py-2 font-medium text-center">Vianda</th>
-                    <th class="py-2 font-medium text-center">Precio</th>
+                <template #header="{ sort, sortKey, sortOrder }">
+                    <th @click="sort('usuario.id')" class="py-2 font-medium text-center cursor-pointer">
+                        Legajo <span v-if="sortKey === 'usuario.id'">{{ sortOrder === 'asc' ? '🔼' : '🔽' }}</span>
+                    </th>
+                    <th @click="sort('usuario.nombre')" class="py-2 font-medium text-center cursor-pointer">
+                        Nombre Cliente <span v-if="sortKey === 'usuario.nombre'">{{ sortOrder === 'asc' ? '🔼' : '🔽' }}</span>
+                    </th>
+                    <th v-if="!distribuidora" @click="sort('vianda.distribuidora.nombre')" class="py-2 font-medium text-center cursor-pointer">
+                        Distribuidora <span v-if="sortKey === 'vianda.distribuidora.nombre'">{{ sortOrder === 'asc' ? '🔼' : '🔽' }}</span>
+                    </th>
+                    <th @click="sort('vianda.nombre')" class="py-2 font-medium text-center cursor-pointer">
+                        Vianda <span v-if="sortKey === 'vianda.nombre'">{{ sortOrder === 'asc' ? '🔼' : '🔽' }}</span>
+                    </th>
+                    <th @click="sort('vianda.precio')" class="py-2 font-medium text-center cursor-pointer">
+                        Precio <span v-if="sortKey === 'vianda.precio'">{{ sortOrder === 'asc' ? '🔼' : '🔽' }}</span>
+                    </th>
                 </template>
                 <template #body="{ item }">
                     <td class="py-2 text-gray-600">{{ item.usuario.id }}</td>
