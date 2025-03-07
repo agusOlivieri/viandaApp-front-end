@@ -8,6 +8,8 @@ import { API_URL } from "@/config/api";
 
 const router = useRouter();
 
+const emit = defineEmits(["login"]);
+
 const form = ref({
   rol: "",
 })
@@ -29,6 +31,7 @@ const register = async () => {
   
   try {
     let endpoint = "";
+    let title;
     let requestData = {
       username: user.value.username,
       apellido: user.value.apellido,
@@ -52,12 +55,18 @@ const register = async () => {
     alert("Registro exitoso");
 
     if (usuarioStore.area) {
+      title = "Ordene su comida"
       router.push("/client/home");
     } else if (usuarioStore.distribuidora) {
+      title = "Vea sus pedidos"
       router.push("/admin/distribuidora/home");
     } else if (usuarioStore.esAdminAguas) {
+      title = "Aguas Riojanas"
       router.push("/admin/aguas/home");
     }
+
+    emit("login", title);
+    
   } catch (error) {
     console.error("Error en el registro:", error);
     alert("Hubo un problema con el registro. Por favor, intente de nuevo.");
