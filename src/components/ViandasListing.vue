@@ -34,12 +34,13 @@ const fetchViandas = async () => {
 
 onMounted(fetchViandas);
 watch(() => props.distribuidora, fetchViandas);
+
 </script>
 
 <template>
-    <section id="order" class="my-4 flex justify-center">
+    <section id="order" class="my-4 flex justify-center ">
         <div class="w-full max-sm:w-5/6 bg-white rounded-lg shadow-lg p-6">
-            <h2 class="text-xl sm:text-2xl font-bold text-center mb-6">Elija Su Vianda</h2>
+            <h2 class="text-xl sm:text-2xl font-bold text-center mb-6">Viandas de {{ distribuidora }}</h2>
             <div class="max-h-[550px] overflow-y-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 py-3">
                 <Vianda v-for="vianda in viandas" :key="vianda.id" :vianda="vianda" />
             </div>

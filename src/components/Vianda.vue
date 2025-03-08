@@ -57,7 +57,7 @@ const cancelarSeleccion = () => {
             <p class="text-sm text-gray-600 mt-2">{{ props.vianda.descripcion }}</p>
             <div class="mt-4 flex justify-between items-center">
                 <span class="text-lg sm:text-xl font-semibold text-blue-700">${{ props.vianda.precio }}</span>
-                <button class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-700" @click="seleccionarVianda">
+                <button class="bg-blue-800 text-white py-1 px-3 rounded-md hover:bg-blue-900" @click="seleccionarVianda">
                     Seleccionar
                 </button>
             </div>

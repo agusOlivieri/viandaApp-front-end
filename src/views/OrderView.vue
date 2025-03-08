@@ -8,8 +8,7 @@ const distribuidora = route.params.distribuidora;
 </script>
 
 <template>
-    <div>
-        <h1 class="text-2xl sm:text-3xl font-bold text-center my-6">Viandas de {{ distribuidora }}</h1>
+    <div class="mt-14">
         <ViandasListing :distribuidora="distribuidora"/>
         <VolverBtn />
     </div>

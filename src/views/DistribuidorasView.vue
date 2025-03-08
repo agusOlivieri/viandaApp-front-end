@@ -22,9 +22,9 @@ onMounted(fetchDistribuidoras)
 </script>
 
 <template>
-    <section id="distribuidoras" class="flex flex-col h-screen w-full py-4">
-        <h1 class="text-2xl sm:text-3xl font-bold text-center mt-4">Elija una distribuidora</h1>
-        <div class="flex-grow flex flex-col sm:flex-row justify-center items-center gap-5">
+    <section id="distribuidoras" class="flex flex-col h-screen w-full py-4 justify-center items-center gap-5">
+        <h1 class="text-2xl sm:text-3xl font-bold mt-4">Elija una distribuidora</h1>
+        <div class="flex flex-col sm:flex-row justify-center items-center gap-5">
             <RouterLink  
                 v-for="distribuidora in distribuidoras"
                 :key="distribuidora.id" 
