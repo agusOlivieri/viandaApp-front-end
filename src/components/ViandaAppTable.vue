@@ -51,13 +51,13 @@ defineExpose({ sortColumn, sortKey, sortOrder });
 </script>
 
 <template>
-    <div class="w-full h-[350px] bg-white shadow-md rounded-lg">
+    <div class="w-full h-[300px] bg-sky-200 shadow-md rounded-lg">
         <!-- Contenedor para el scroll horizontal -->
         <div class="w-full h-full overflow-x-auto rounded-lg">
             <!-- Contenedor para el scroll vertical -->
             <div class="w-full h-full overflow-y-auto">
-                <table class="w-full min-w-[600px] shadow-lg">
-                    <thead class="border-b-2 sticky top-0 bg-white">
+                <table class="w-full min-w-[600px]">
+                    <thead class="border-b-4 border-b-white sticky top-0 bg-sky-200">
                         <tr>
                             <slot name="header" :sort="sortColumn" :sortKey="sortKey" :sortOrder="sortOrder"></slot>
                             <th v-if="acciones" class="py-2 text-center font-medium">Acciones</th>

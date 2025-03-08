@@ -91,39 +91,41 @@ onUnmounted(() => {
 
 <template>
     <section id="viandas">
-        <VolverBtn />
-        <div class="w-full px-6">
-            <ViandaAppTable :items="data" :acciones="false">
-                <template #header="{ sort, sortKey, sortOrder }">
-                    <th @click="sort('usuario.id')" class="py-2 font-medium text-center cursor-pointer">
-                        Legajo <span v-if="sortKey === 'usuario.id'">{{ sortOrder === 'asc' ? '🔼' : '🔽' }}</span>
-                    </th>
-                    <th @click="sort('usuario.nombre')" class="py-2 font-medium text-center cursor-pointer">
-                        Nombre Cliente <span v-if="sortKey === 'usuario.nombre'">{{ sortOrder === 'asc' ? '🔼' : '🔽' }}</span>
-                    </th>
-                    <th v-if="!distribuidora" @click="sort('vianda.distribuidora.nombre')" class="py-2 font-medium text-center cursor-pointer">
-                        Distribuidora <span v-if="sortKey === 'vianda.distribuidora.nombre'">{{ sortOrder === 'asc' ? '🔼' : '🔽' }}</span>
-                    </th>
-                    <th @click="sort('vianda.nombre')" class="py-2 font-medium text-center cursor-pointer">
-                        Vianda <span v-if="sortKey === 'vianda.nombre'">{{ sortOrder === 'asc' ? '🔼' : '🔽' }}</span>
-                    </th>
-                    <th @click="sort('vianda.precio')" class="py-2 font-medium text-center cursor-pointer">
-                        Precio <span v-if="sortKey === 'vianda.precio'">{{ sortOrder === 'asc' ? '🔼' : '🔽' }}</span>
-                    </th>
-                </template>
-                <template #body="{ item }">
-                    <td class="py-2 text-gray-600">{{ item.usuario.id }}</td>
-                    <td class="py-2 text-gray-600">{{ item.usuario.nombre }}</td>
-                    <td v-if="!distribuidora">{{ item.vianda.distribuidora.nombre }}</td>
-                    <td class="py-2 text-gray-600">{{ item.vianda.nombre }}</td>
-                    <td class="py-2 text-gray-600">{{ item.vianda.precio }}</td>
-                </template>
-            </ViandaAppTable>
-        </div>
-        <div>
-
-            <RemitoBtn @remito="generarRemito"/>
-            <ReporteBtn @reporte="descargarReporte"/>
+        <div class="mt-16">
+            <VolverBtn />
+            <div class="w-full px-6">
+                <ViandaAppTable :items="data" :acciones="false">
+                    <template #header="{ sort, sortKey, sortOrder }">
+                        <th @click="sort('usuario.id')" class="py-2 font-medium text-center cursor-pointer">
+                            Legajo <span v-if="sortKey === 'usuario.id'">{{ sortOrder === 'asc' ? '🔼' : '🔽' }}</span>
+                        </th>
+                        <th @click="sort('usuario.nombre')" class="py-2 font-medium text-center cursor-pointer">
+                            Nombre Cliente <span v-if="sortKey === 'usuario.nombre'">{{ sortOrder === 'asc' ? '🔼' : '🔽' }}</span>
+                        </th>
+                        <th v-if="!distribuidora" @click="sort('vianda.distribuidora.nombre')" class="py-2 font-medium text-center cursor-pointer">
+                            Distribuidora <span v-if="sortKey === 'vianda.distribuidora.nombre'">{{ sortOrder === 'asc' ? '🔼' : '🔽' }}</span>
+                        </th>
+                        <th @click="sort('vianda.nombre')" class="py-2 font-medium text-center cursor-pointer">
+                            Vianda <span v-if="sortKey === 'vianda.nombre'">{{ sortOrder === 'asc' ? '🔼' : '🔽' }}</span>
+                        </th>
+                        <th @click="sort('vianda.precio')" class="py-2 font-medium text-center cursor-pointer">
+                            Precio <span v-if="sortKey === 'vianda.precio'">{{ sortOrder === 'asc' ? '🔼' : '🔽' }}</span>
+                        </th>
+                    </template>
+                    <template #body="{ item }">
+                        <td class="py-2 text-gray-600">{{ item.usuario.id }}</td>
+                        <td class="py-2 text-gray-600">{{ item.usuario.nombre }}</td>
+                        <td v-if="!distribuidora">{{ item.vianda.distribuidora.nombre }}</td>
+                        <td class="py-2 text-gray-600">{{ item.vianda.nombre }}</td>
+                        <td class="py-2 text-gray-600">{{ item.vianda.precio }}</td>
+                    </template>
+                </ViandaAppTable>
+            </div>
+            <div>
+    
+                <RemitoBtn @remito="generarRemito"/>
+                <ReporteBtn @reporte="descargarReporte"/>
+            </div>
         </div>
     </section>
 </template>

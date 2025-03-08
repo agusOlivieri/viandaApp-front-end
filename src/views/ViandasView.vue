@@ -78,35 +78,37 @@ const deleteVianda = async (id) => {
 
 <template>
     <section id="viandas">
-        <VolverBtn />
-        <div class="w-full px-6">
-            <ViandaAppTable :items="data" :acciones="true">
-                <template #header>
-                    <th class="py-2 font-medium text-center">Nombre</th>
-                    <th class="py-2 font-medium text-center">Descripción</th>
-                    <th class="py-2 font-medium text-center">Precio</th>
-                </template>
-                <template #body="{ item }">
-                    <td class="py-2">{{ item.nombre }}</td>
-                    <td class="py-2">{{ item.descripcion }}</td>
-                    <td class="py-2">{{ item.precio }}</td>
-                </template>
-                <template #actions="{ item }">
-                    <td class="py-2 flex gap-2 justify-center">
-                        <EditBtn @edit="editVianda(item)" />
-                        <DeleteBtn @delete="deleteVianda(item.id)"/>
-                    </td>
-                </template>    
-            </ViandaAppTable>
+        <div class="mt-16">
+            <VolverBtn />
+            <div class="w-full px-6">
+                <ViandaAppTable :items="data" :acciones="true">
+                    <template #header>
+                        <th class="py-2 font-medium text-center">Nombre</th>
+                        <th class="py-2 font-medium text-center">Descripción</th>
+                        <th class="py-2 font-medium text-center">Precio</th>
+                    </template>
+                    <template #body="{ item }">
+                        <td class="py-2">{{ item.nombre }}</td>
+                        <td class="py-2">{{ item.descripcion }}</td>
+                        <td class="py-2">{{ item.precio }}</td>
+                    </template>
+                    <template #actions="{ item }">
+                        <td class="py-2 flex gap-2 justify-center">
+                            <EditBtn @edit="editVianda(item)" />
+                            <DeleteBtn @delete="deleteVianda(item.id)"/>
+                        </td>
+                    </template>    
+                </ViandaAppTable>
+            </div>
+    
+            <NuevoBtn link="/admin/distribuidora/viandas/new" text="Nuevo"/>
+            
+            <EditViandaModal 
+                :isOpen="modalOpen"
+                :vianda="selectedItem"
+                @close="modalOpen = false"
+                @update="updateVianda"
+            />
         </div>
-
-        <NuevoBtn link="/admin/distribuidora/viandas/new" text="Nuevo"/>
-        
-        <EditViandaModal 
-            :isOpen="modalOpen"
-            :vianda="selectedItem"
-            @close="modalOpen = false"
-            @update="updateVianda"
-        />
     </section>
 </template>
