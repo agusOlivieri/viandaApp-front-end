@@ -63,7 +63,7 @@ defineExpose({ sortColumn, sortKey, sortOrder });
                             <th v-if="acciones" class="py-2 text-center font-medium">Acciones</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y">
+                    <tbody class="divide-y-2 divide-gray-100">
                         <tr v-for="(item, index) in sortedItems" :key="index" class="hover:bg-gray-50 text-center">
                             <slot name="body" :item="item"></slot>
                             <slot name="actions" :item="item"></slot>
