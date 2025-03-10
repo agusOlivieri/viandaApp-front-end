@@ -122,7 +122,6 @@ onUnmounted(() => {
                 </ViandaAppTable>
             </div>
             <div>
-    
                 <RemitoBtn @remito="generarRemito"/>
                 <ReporteBtn @reporte="descargarReporte"/>
             </div>
