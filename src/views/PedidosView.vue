@@ -113,11 +113,11 @@ onUnmounted(() => {
                         </th>
                     </template>
                     <template #body="{ item }">
-                        <td class="py-2 text-gray-600">{{ item.usuario.id }}</td>
-                        <td class="py-2 text-gray-600">{{ item.usuario.nombre }}</td>
-                        <td v-if="!distribuidora">{{ item.vianda.distribuidora.nombre }}</td>
-                        <td class="py-2 text-gray-600">{{ item.vianda.nombre }}</td>
-                        <td class="py-2 text-gray-600">{{ item.vianda.precio }}</td>
+                        <td class="py-2 text-gray-700">{{ item.usuario.id }}</td>
+                        <td class="py-2 text-gray-700">{{ item.usuario.nombre }}</td>
+                        <td v-if="!distribuidora" class="py-2 text-gray-700">{{ item.vianda.distribuidora.nombre }}</td>
+                        <td class="py-2 text-gray-700">{{ item.vianda.nombre }}</td>
+                        <td class="py-2 text-gray-700">${{ item.vianda.precio }}</td>
                     </template>
                 </ViandaAppTable>
             </div>
